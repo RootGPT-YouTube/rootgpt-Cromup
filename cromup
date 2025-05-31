@@ -31,7 +31,7 @@ wget -O "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel 
 mkdir -p "$CROMITE_DIR"
 
 # Elimina i file .manifest nelle sottocartelle di Cromite
-echo -e "\e[1;32mPulizia dei files .manifest delle vecchie versioni..."
+echo -e "\e[1;32mPulizia dei files .manifest delle vecchie versioni...\e[0m"
 find "$CROMITE_DIR" -type f -name "*.manifest" -exec rm -f {} +
 
 # Estrazione con barra di avanzamento tramite pv
