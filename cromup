@@ -16,6 +16,8 @@ if ! command -v pv &> /dev/null; then
         sudo apt install pv -y
     elif command -v pacman &> /dev/null; then
         sudo pacman -S --noconfirm pv
+    elif command -v zypper &> /dev/null; then
+        sudo zypper install pv -y
     else
         echo -e "\e[1;32mImpossibile installare pv automaticamente. Installalo manualmente.\e[0m"
         exit 1
