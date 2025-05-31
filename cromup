@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Definizione delle variabili
+DOWNLOAD_DIR="$HOME/"
+CROMITE_DIR="$HOME/Cromite"
+FILE_URL="https://github.com/uazo/cromite/releases/latest/download/chrome-lin64.tar.gz"
+FILE_NAME="chrome-lin64.tar.gz"
+
+# Installazione di pv (se non presente)
+echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
+if ! command -v pv &> /dev/null; then
+    echo -e "\e[1;32mpv non trovato, installazione in corso...\e[0m"
+    if command -v dnf &> /dev/null; then
+        sudo dnf install pv -y
+    elif command -v apt &> /dev/null; then
+        sudo apt install pv -y
+    elif command -v pacman &> /dev/null; then
+        sudo pacman -S --noconfirm pv
+    else
+        echo -e "\e[1;32mImpossibile installare pv automaticamente. Installalo manualmente.\e[0m"
+        exit 1
+    fi
+fi
+
+# Scarica il file
+echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
+mkdir -p "$DOWNLOAD_DIR"
+wget -O "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
+
+# Crea la directory di destinazione se non esiste
+mkdir -p "$CROMITE_DIR"
+
+# Elimina i file .manifest nelle sottocartelle di Cromite
+echo -e "\e[1;32mPulizia dei files .manifest delle vecchie versioni..."
+find "$CROMITE_DIR" -type f -name "*.manifest" -exec rm -f {} +
+
+# Estrazione con barra di avanzamento tramite pv
+echo -e "\e[1;32mEstrazione del file archivio di Cromite...\e[0m"
+pv -p -e -L 20000000 -s "$(stat -c%s "$DOWNLOAD_DIR/$FILE_NAME")" "$DOWNLOAD_DIR/$FILE_NAME" | tar -xz -f - -C "$CROMITE_DIR" --overwrite || { echo -e "\e[1;32mErrore nell'estrazione!\e[0m"; exit 1; }
+
+# Sposta i file e cartelle e pulizia files ridondanti
+echo -e "\e[1;32mInstallazione dei nuovi files di Cromite e pulizia dei files ridondanti...\e[0m"
+cp -r "$CROMITE_DIR/chrome-lin/"* "$CROMITE_DIR/"
+rm -rf "$CROMITE_DIR/chrome-lin"
+rm "$DOWNLOAD_DIR/$FILE_NAME"
+
+# Fine script
+echo -e "\e[1;32mOperazione completata! Premi un tasto per continuare.\e[0m"
+read
