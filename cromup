@@ -47,5 +47,4 @@ rm -rf "$CROMITE_DIR/chrome-lin"
 rm "$DOWNLOAD_DIR/$FILE_NAME"
 
 # Fine script
-echo -e "\e[1;32mOperazione completata! Premi un tasto per continuare.\e[0m"
-read
+echo -e "\e[1;32mCromite Browser installato.\e[0m"
