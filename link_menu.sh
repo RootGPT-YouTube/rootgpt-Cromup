@@ -25,6 +25,7 @@ TerminalOptions=
 Type=Application
 X-KDE-SubstituteUID=false
 X-KDE-Username=
+Categories=Network;WebBrowser;
 " | sudo tee "$DESKTOP_FILE"
 
 # Rendere il file eseguibile
