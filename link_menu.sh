@@ -13,7 +13,7 @@ curl -o "$ICON_PATH" "$ICON_URL"
 # Creazione del file .desktop
 echo "[Desktop Entry]
 Comment=Take back your browser
-Exec=$HOME/Cromite/chrome
+Exec=$HOME/Cromite/cromite
 GenericName=Browser
 Icon=$HOME/Cromite/cromite_icon.png
 Name=Cromite
@@ -31,7 +31,11 @@ Categories=Network;WebBrowser;
 # Rendere il file eseguibile
 # sudo chmod a+x "$DESKTOP_FILE"
 
+# Rinominare l'eseguibile chrome in cromite
+sudo mv ~/Cromite/chrome ~/Cromite/cromite
+
 echo -e "\e[1;32mCollegamento creato con successo in $DESKTOP_FILE\e[0m"
 echo -e "\e[1;32mIcona scaricata e salvata in $ICON_PATH\e[0m"
 echo -e "\e[1;32mPremere un tasto per terminare lo script e iniziare a usare Cromite Browser!\e[0m"
+echo -e "\e[1;32mPS: bug conosciuti: in KDE l'icona nel menù va creata con l'Editor del menù (kmenuedit).\e[0m"
 read
