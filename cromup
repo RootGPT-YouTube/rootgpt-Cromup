@@ -45,6 +45,8 @@ echo -e "\e[1;32mInstallazione dei nuovi files di Cromite e pulizia dei files ri
 cp -r "$CROMITE_DIR/chrome-lin/"* "$CROMITE_DIR/"
 rm -rf "$CROMITE_DIR/chrome-lin"
 rm "$DOWNLOAD_DIR/$FILE_NAME"
+cp "$CROMITE_DIR/chrome" "$CROMITE_DIR/cromite"
+rm "$CROMITE_DIR/chrome"
 
 # Fine script
 echo -e "\e[1;32mCromite Browser installato.\e[0m"
