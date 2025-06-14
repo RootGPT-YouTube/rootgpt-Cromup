@@ -14,5 +14,5 @@ Now, if you want, you can delete the rootgpt-Cromup directory:
 `cd .. && rm -fr rootgpt-Cromup/`  
 Finally, you can enjoy the best browser!  
 PS: Known bugs (if you can, you can help me!):  
-1. In KDE, the icon in the menu must be created using the Menu Editor (kmenuedit).  
+1. Sometimes, the icon in the menu must be created manually, I don't know why...;  
 2. In some DEs, the Chromium icon will appear instead of the Cromite one.
