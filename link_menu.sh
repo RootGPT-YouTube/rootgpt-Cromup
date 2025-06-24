@@ -27,7 +27,7 @@ Categories=Network;WebBrowser;
 # sudo chmod a+x "$DESKTOP_FILE"
 
 # Rinominare l'eseguibile chrome in cromite
-sudo mv ~/Cromite/chrome ~/Cromite/cromite
+# sudo mv ~/Cromite/chrome ~/Cromite/cromite
 
 echo -e "\e[1;32mCollegamento creato con successo in $DESKTOP_FILE\e[0m"
 echo -e "\e[1;32mIcona scaricata e salvata in $ICON_PATH\e[0m"
