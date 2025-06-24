@@ -14,5 +14,5 @@ Now, if you want, you can delete the rootgpt-Cromup directory:
 `cd .. && rm -fr rootgpt-Cromup/`  
 Finally, you can enjoy the best browser!  
 PS: Known bugs (if you can, you can help me!):  
-1. Sometimes, the icon in the menu must be created manually, I don't know why... However, the executable are in ~/Cromite/cromite;  
+1. Sometimes, the icon in the menu must be created manually. I don't know why, by the way, in Cinnamon (tested in Mint and LMDE) works great... for the link, the executable are in ~/Cromite/cromite;  
 2. In some DEs, the Chromium icon will appear instead of the Cromite one.
