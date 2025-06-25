@@ -8,7 +8,7 @@ Make the file `install.sh` executable:
 `sudo chmod a+x install.sh`  
 Launch the install.sh file:  
 `./install.sh`  
-This command will download the needed files for Cromite Browser installation and will install it.  
+This command will download the needed files for Cromite Browser (Cromite is created by UAZO, is not my work) installation and will install it.  
 If Cromite is already installed, you can update it with `cromup` terminal command.  
 Now, if you want, you can delete the rootgpt-Cromup directory:  
 `cd .. && rm -fr rootgpt-Cromup/`  
