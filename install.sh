@@ -2,8 +2,8 @@
 set -euo pipefail
 
 echo -e "\e[1;32mInstallazione cromup, è possibile che venga richiesta la password utente o di root...\e[0m"
-sudo chmod a+x cromup
-sudo cp cromup /usr/local/bin/
+sudo chmod a+x ~/rootgpt-Cromup/cromup
+sudo cp ~/rootgpt-Cromup/cromup /usr/local/bin/
 echo -e "\e[1;32mSto per avviare cromup per la prima volta.\e[0m"
 echo -e "\e[1;32mcromup è il comando da terminale necessario per installare e aggiornare Cromite Browser.\e[0m"
 echo -e "\e[1;32mDa ora in poi, quando vorrai aggiornare Cromite, ti basterà lanciare cromup da terminale.\e[0m"
