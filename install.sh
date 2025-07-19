@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+#set -euo pipefail
 
 echo -e "\e[1;32mCreazione e installazione del comando cromup...\e[0m"
 sudo chmod a+x ~/rootgpt-Cromup/cromup
