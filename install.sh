@@ -71,7 +71,7 @@ KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu"
 WORKING_DIR="$HOME/rootgpt-Cromup"
 
 # Eliminazione eventuali Cromite.desktop precedenti
-echo -e "\e[1;32m✅ Rimozione di collegamenti nel menù creati da precedenti installazioni...\e[0m"
+echo -e "\e[1;32m❌ Rimozione di collegamenti nel menù creati da precedenti installazioni...\e[0m"
 sudo rm "$DESKTOP_LOCAL"
 sudo rm "$DESKTOP_GLOBAL"
 
