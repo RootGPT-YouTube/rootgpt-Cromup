@@ -70,6 +70,10 @@ DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu"
 WORKING_DIR="$HOME/rootgpt-Cromup"
 
+# Eliminazione eventuali Cromite.desktop precedenti
+sudo rm "$DESKTOP_LOCAL"
+sudo rm "$DESKTOP_GLOBAL"
+
 # Scarica icona
 sudo curl -fsSL -o "$ICON_DEST" "$ICON_URL"
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
@@ -98,7 +102,7 @@ EOF
 sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
 
 # Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache
-if [[ "${XDG_CURRENT_DESKTOP:-}" =~ KDE|Plasma ]]; then
+if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   if [ -f "$KDE_MENU" ]; then
     echo "🧹 Rimuovo override utente da KDE menu..."
     rm -f "$KDE_MENU"
