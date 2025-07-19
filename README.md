@@ -1,18 +1,8 @@
 # rootgpt-rep: cromup
 Instruction:  
-Open terminal and write:  
-`git clone https://github.com/RootGPT-YouTube/rootgpt-Cromup.git`  
-Enter in the downloaded directory:  
-`cd rootgpt-Cromup`  
-Make the file `install.sh` executable:  
-`sudo chmod a+x install.sh`  
-Launch the install.sh file:  
-`./install.sh`  
-This command will download the needed files for Cromite Browser (Cromite is created by UAZO, is not my work) installation and will install it.  
-If Cromite is already installed, you can update it with `cromup` terminal command.  
-Now, if you want, you can delete the rootgpt-Cromup directory:  
-`cd .. && rm -fr rootgpt-Cromup/`  
-Finally, you can enjoy the best browser!  
-PS: Known bugs (if you can, you can help me!):  
-1. Sometimes, the icon in the menu must be created manually. I don't know why, by the way, in Cinnamon (tested in Mint and LMDE) works great... for the link, the executable are in ~/Cromite/cromite;  
-2. In some DEs, the Chromium icon will appear instead of the Cromite one.
+Open terminal and copy and paste this command:  
+`git clone https://github.com/RootGPT-YouTube/rootgpt-Cromup.git && sudo chmod a+x ~/rootgpt-Cromup/install.sh && ~/rootgpt-Cromup/install.sh`  
+This command will download the needed files for Cromite Browser installation (Cromite is created by UAZO, is not my work) and will install it.  
+If Cromite is already installed with my script, you can update the browser with `cromup` terminal command.  
+Enjoy the best browser!  
+If you find bugs, report it to me, thx!
