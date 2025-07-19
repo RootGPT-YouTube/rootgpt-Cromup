@@ -68,6 +68,7 @@ ICON_DEST="/usr/share/icons/hicolor/192x192/apps/${ICON_NAME}.png"
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu"
+WORKING_DIR="$HOME/rootgpt-Cromup"
 
 # Scarica icona
 sudo curl -fsSL -o "$ICON_DEST" "$ICON_URL"
@@ -108,11 +109,15 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" =~ KDE|Plasma ]]; then
   echo "✅ Cache KDE aggiornata."
 fi
 
+#Eliminazione cartella di lavoro
+echo -e "\e[1;32mEliminazione cartella di lavoro...\e[0m"
+sudo rm -fr "$WORKING_DIR"
+
 # Output finale
 echo -e "\e[1;32m✅ Cromite installato correttamente!\e[0m"
 echo -e "  • Icona salvata in: $ICON_DEST"
 echo -e "  • Desktop entry (utente): $DESKTOP_LOCAL"
 echo -e "  • Desktop entry (globale): $DESKTOP_GLOBAL"
-echo -e "\e[1;33mℹ️  Se l’icona non compare subito nel menu, prova a fare logout o riavviare Plasma.\e[0m"
+echo -e "\e[1;33mℹ️  Se l’icona non cdovesse comparire subito nel menu, provare a fare logout o a riavviare Plasma.\e[0m"
 echo -e "\e[1;32mPremi INVIO per uscire…\e[0m"
 read -r
