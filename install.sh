@@ -70,9 +70,9 @@ KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu"
 WORKING_DIR="$HOME/rootgpt-Cromup"
 
 # Eliminazione eventuali Cromite.desktop precedenti
-echo -e "\e[1;32m❌ Tentativo di rimozione di collegamenti nel menù creati da precedenti installazioni. Se questa è la prima volta che si installa Cromite compariranno due errori perché non esistono collegamenti chiamati Cromite.desktop. Questo è NORMALE!\e[0m"
-sudo rm "$DESKTOP_LOCAL"
-sudo rm "$DESKTOP_GLOBAL"
+echo -e "\e[1;32m✅ Tentativo di rimozione di collegamenti nel menù creati da precedenti installazioni...\e[0m"
+sudo rm -f "$DESKTOP_LOCAL"
+sudo rm -f "$DESKTOP_GLOBAL"
 
 echo -e "\e[1;32mCreazione collegamento nel menù delle applicazioni...\e[0m"
 
