@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo -e "\e[1;32mInstallazione cromup, è possibile che venga richiesta la password utente o di root...\e[0m"
+echo -e "\e[1;32mCreazione e installazione del comando cromup...\e[0m"
 sudo chmod a+x ~/rootgpt-Cromup/cromup
 sudo cp ~/rootgpt-Cromup/cromup /usr/local/bin/
 echo -e "\e[1;32mSto per avviare cromup per la prima volta.\e[0m"
