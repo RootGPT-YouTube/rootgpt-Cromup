@@ -10,7 +10,6 @@ echo -e "\e[1;32mDa ora in poi, quando vorrai aggiornare Cromite, ti basterà la
 echo -e "\e[1;32mPremere un tasto per installare Cromite adesso tramite cromup oppure CTRL+c per interrompere la procedura...\e[0m"
 read
 cromup
-echo -e "\e[1;32mCreazione collegamento nel menù delle applicazioni...\e[0m"
 
 # Se usare link_menu.sh decommentare le due righe sotto
 # sudo chmod a+x link_menu.sh
@@ -75,6 +74,8 @@ echo -e "\e[1;32m❌ Tentativo di rimozione di collegamenti nel menù creati da 
 sudo rm "$DESKTOP_LOCAL"
 sudo rm "$DESKTOP_GLOBAL"
 
+echo -e "\e[1;32mCreazione collegamento nel menù delle applicazioni...\e[0m"
+
 # Scarica icona
 sudo curl -fsSL -o "$ICON_DEST" "$ICON_URL"
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
@@ -123,6 +124,6 @@ echo -e "\e[1;32m✅ Cromite installato correttamente!\e[0m"
 echo -e "  • Icona salvata in: $ICON_DEST"
 echo -e "  • Desktop entry (utente): $DESKTOP_LOCAL"
 echo -e "  • Desktop entry (globale): $DESKTOP_GLOBAL"
-echo -e "\e[1;33mℹ️  Se l’icona non cdovesse comparire subito nel menu, provare a fare logout o a riavviare Plasma.\e[0m"
+echo -e "\e[1;33mℹ️  Se l’icona non dovesse comparire subito nel menu, provare a fare logout o a riavviare il DE o il PC.\e[0m"
 echo -e "\e[1;32mPremi INVIO per uscire…\e[0m"
 read -r
