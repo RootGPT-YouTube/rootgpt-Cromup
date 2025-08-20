@@ -77,8 +77,8 @@ sudo rm -f "$DESKTOP_GLOBAL"
 
 echo -e "\e[1;32mCreazione collegamento nel menù delle applicazioni...\e[0m"
 
-# Scarica icona
-# sudo curl -fsSL -o "$ICON_DEST" "$ICON_URL"
+# old Scarica icona
+# old sudo curl -fsSL -o "$ICON_DEST" "$ICON_URL"
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 
 # Crea desktop entry
