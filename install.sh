@@ -61,7 +61,8 @@ fi
 # --- Variabili ---
 APP_NAME="Cromite"
 EXEC_PATH="$HOME/Cromite/cromite"
-ICON_URL="https://camo.githubusercontent.com/6b4ee03be91712db2d81b603a1bb83553e97b66fa49443bf27b641089ea51696/68747470733a2f2f7777772e63726f6d6974652e6f72672f6170705f69636f6e2e706e67"
+ICON_URL="$HOME/Cromite/cromite_icon.png"
+# old ICON_URL="https://camo.githubusercontent.com/6b4ee03be91712db2d81b603a1bb83553e97b66fa49443bf27b641089ea51696/68747470733a2f2f7777772e63726f6d6974652e6f72672f6170705f69636f6e2e706e67"
 ICON_NAME="cromite"
 ICON_DEST="/usr/share/icons/hicolor/192x192/apps/${ICON_NAME}.png"
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
@@ -77,7 +78,7 @@ sudo rm -f "$DESKTOP_GLOBAL"
 echo -e "\e[1;32mCreazione collegamento nel menù delle applicazioni...\e[0m"
 
 # Scarica icona
-sudo curl -fsSL -o "$ICON_DEST" "$ICON_URL"
+# sudo curl -fsSL -o "$ICON_DEST" "$ICON_URL"
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 
 # Crea desktop entry
