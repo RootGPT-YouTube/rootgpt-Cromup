@@ -7,7 +7,7 @@ FILE_URL="https://github.com/uazo/cromite/releases/latest/download/chrome-lin64.
 FILE_NAME="chrome-lin64.tar.gz"
 ICON_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromite_icon.png"
 ICON_NAME_PATH="$HOME/Cromite/cromite_icon.png"
-ICON_DEST="/usr/share/icons/hicolor/192x192/apps/cromite"
+ICON_DEST="/usr/share/icons/hicolor/192x192/apps/cromite.png"
 
 # Installazione di pv (se non presente)
 echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
