@@ -7,7 +7,8 @@ FILE_URL="https://github.com/uazo/cromite/releases/latest/download/chrome-lin64.
 FILE_NAME="chrome-lin64.tar.gz"
 ICON_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromite_icon.png"
 ICON_NAME_PATH="$HOME/Cromite/cromite_icon.png"
-ICON_DEST="/usr/share/icons/hicolor/192x192/apps/cromite.png"
+ICON_DEST1="/usr/share/icons/hicolor/192x192/apps/cromite.png"
+ICON_DEST2="/usr/share/icons/hicolor/192x192/apps/cromite"
 
 # Installazione di pv (se non presente)
 echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
@@ -41,7 +42,8 @@ find "$CROMITE_DIR" -type f -name "*.manifest" -exec rm -f {} +
 
 # Copia nuova icona
 wget -O "$ICON_NAME_PATH" "$ICON_URL" || { echo -e "\e[1;32mErrore nel download dell'icona!\e[0m"; exit 1; }
-sudo cp "$ICON_NAME_PATH" "$ICON_DEST"
+sudo cp "$ICON_NAME_PATH" "$ICON_DEST1"
+sudo cp "$ICON_NAME_PATH" "$ICON_DEST2"
 
 # Estrazione con barra di avanzamento tramite pv
 echo -e "\e[1;32mEstrazione del file archivio di Cromite...\e[0m"
