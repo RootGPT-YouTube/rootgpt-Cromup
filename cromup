@@ -39,7 +39,7 @@ echo -e "\e[1;32mPulizia dei files .manifest delle vecchie versioni...\e[0m"
 find "$CROMITE_DIR" -type f -name "*.manifest" -exec rm -f {} +
 
 # Copia nuova icona
-cp "$ICON_NAME_PATH" "$ICON_DEST"
+sudo cp "$ICON_NAME_PATH" "$ICON_DEST"
 
 # Estrazione con barra di avanzamento tramite pv
 echo -e "\e[1;32mEstrazione del file archivio di Cromite...\e[0m"
