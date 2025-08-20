@@ -5,6 +5,7 @@ DOWNLOAD_DIR="$HOME/"
 CROMITE_DIR="$HOME/Cromite"
 FILE_URL="https://github.com/uazo/cromite/releases/latest/download/chrome-lin64.tar.gz"
 FILE_NAME="chrome-lin64.tar.gz"
+ICON_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromite_icon.png"
 ICON_NAME_PATH="$HOME/Cromite/cromite_icon.png"
 ICON_DEST="/usr/share/icons/hicolor/192x192/apps/cromite"
 
@@ -39,6 +40,7 @@ echo -e "\e[1;32mPulizia dei files .manifest delle vecchie versioni...\e[0m"
 find "$CROMITE_DIR" -type f -name "*.manifest" -exec rm -f {} +
 
 # Copia nuova icona
+wget -O "$ICON_NAME_PATH" "$ICON_URL" || { echo -e "\e[1;32mErrore nel download dell'icona!\e[0m"; exit 1; }
 sudo cp "$ICON_NAME_PATH" "$ICON_DEST"
 
 # Estrazione con barra di avanzamento tramite pv
