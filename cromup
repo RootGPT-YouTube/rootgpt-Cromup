@@ -5,10 +5,13 @@ DOWNLOAD_DIR="$HOME/"
 CROMITE_DIR="$HOME/Cromite"
 FILE_URL="https://github.com/uazo/cromite/releases/latest/download/chrome-lin64.tar.gz"
 FILE_NAME="chrome-lin64.tar.gz"
-ICON_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromite_icon.png"
+ICON_URL="https://camo.githubusercontent.com/6b4ee03be91712db2d81b603a1bb83553e97b66fa49443bf27b641089ea51696/68747470733a2f2f7777772e63726f6d6974652e6f72672f6170705f69636f6e2e706e67"
 ICON_NAME_PATH="$HOME/Cromite/cromite_icon.png"
 ICON_DEST1="/usr/share/icons/hicolor/192x192/apps/cromite.png"
 ICON_DEST2="/usr/share/icons/hicolor/192x192/apps/cromite"
+CROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromup"
+CROMUP_PATH="/url/local/bin/cromup"
+CROMUP_DIR="$HOME/Cromite/cromup"
 
 # Installazione di pv (se non presente)
 echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
@@ -57,5 +60,11 @@ rm "$DOWNLOAD_DIR/$FILE_NAME"
 cp "$CROMITE_DIR/chrome" "$CROMITE_DIR/cromite"
 rm "$CROMITE_DIR/chrome"
 
+# Aggiornamento cromup
+echo -e "\e[1;32mVerifica aggiornamenti cromup online...\e[0m"
+wget -O "$CROMUP_DIR" "$CROMUP_URL"
+sudo cp "$CROMUP_DIR" "$CROMUP_PATH"
+sudo chmod a+x "$CROMUP_PATH"
+
 # Fine script
-echo -e "\e[1;32mCromite Browser installato.\e[0m"
+echo -e "\e[1;32mCromite Browser installato con successso!\e[0m"
