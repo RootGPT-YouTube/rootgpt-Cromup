@@ -10,7 +10,7 @@ ICON_NAME_PATH="$HOME/Cromite/cromite_icon.png"
 ICON_DEST1="/usr/share/icons/hicolor/192x192/apps/cromite.png"
 ICON_DEST2="/usr/share/icons/hicolor/192x192/apps/cromite"
 CROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromup"
-CROMUP_PATH="/url/local/bin/cromup"
+CROMUP_PATH="/usr/local/bin/cromup"
 CROMUP_DIR="$HOME/Cromite/cromup"
 
 # Installazione di pv (se non presente)
