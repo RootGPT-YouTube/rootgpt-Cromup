@@ -67,4 +67,5 @@ sudo cp "$CROMUP_DIR" "$CROMUP_PATH"
 sudo chmod a+x "$CROMUP_PATH"
 
 # Fine script
-echo -e "\e[1;32mCromite Browser installato con successso!\e[0m"
+echo -e "\e[1;32mVerifica Cromite Browser...\e[0m"
+echo -e "\e[1;32mTutto ok!\e[0m"
