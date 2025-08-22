@@ -32,7 +32,7 @@ if ! command -v pv &> /dev/null; then
 fi
 
 # Scarica il file
-echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
+sudo echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
 mkdir -p "$DOWNLOAD_DIR"
 wget -O "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
 
