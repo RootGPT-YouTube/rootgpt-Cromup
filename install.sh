@@ -61,8 +61,8 @@ fi
 # --- Variabili ---
 APP_NAME="Cromite"
 EXEC_PATH="$HOME/Cromite/cromite"
-# MY ICON_URL="$HOME/Cromite/cromite_icon.png"
-ICON_URL="https://camo.githubusercontent.com/6b4ee03be91712db2d81b603a1bb83553e97b66fa49443bf27b641089ea51696/68747470733a2f2f7777772e63726f6d6974652e6f72672f6170705f69636f6e2e706e67"
+ICON_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromite_icon.png"
+# ORIGINAL ICON_URL="https://camo.githubusercontent.com/6b4ee03be91712db2d81b603a1bb83553e97b66fa49443bf27b641089ea51696/68747470733a2f2f7777772e63726f6d6974652e6f72672f6170705f69636f6e2e706e67"
 ICON_NAME="cromite"
 ICON_DEST="/usr/share/icons/hicolor/192x192/apps/${ICON_NAME}.png"
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
