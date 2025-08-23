@@ -108,12 +108,13 @@ sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
 if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   if [ -f "$KDE_MENU" ]; then
     echo "🧹 Rimuovo override utente da KDE menu..."
-    rm -f "$KDE_MENU"
+    rm -fr "$KDE_MENU"
   fi
   echo "🔄 Ricostruisco cache SYCOCA..."
-  rm -rf ~/.cache/*plasma* ~/.cache/kactivitymanager-statsrc ~/.local/share/applications/Cromite.desktop
   sudo gtk-update-icon-cache /usr/share/icons/hicolor
+  sudo cp "$DESKTOP_GLOBAL" "$DESKTOP_LOCAL"
   kbuildsycoca6 --noincremental
+  killall plasmashell && kstart5 plasmashell
   echo "✅ Cache KDE aggiornata."
 fi
 
