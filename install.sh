@@ -111,7 +111,8 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
     rm -f "$KDE_MENU"
   fi
   echo "🔄 Ricostruisco cache SYCOCA..."
-  rm -rf ~/.cache/*plasma* ~/.cache/kactivitymanager-statsrc
+  rm -rf ~/.cache/*plasma* ~/.cache/kactivitymanager-statsrc ~/.local/share/applications/Cromite.desktop
+  sudo gtk-update-icon-cache /usr/share/icons/hicolor
   kbuildsycoca6 --noincremental
   echo "✅ Cache KDE aggiornata."
 fi
