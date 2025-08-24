@@ -2,7 +2,7 @@
 
 # Definizione delle variabili
 APP_NAME="Cromite"
-DOWNLOAD_DIR="$HOME/"
+DOWNLOAD_DIR="$HOME"
 CROMITE_DIR="$HOME/Cromite"
 FILE_URL="https://github.com/uazo/cromite/releases/latest/download/chrome-lin64.tar.gz"
 FILE_NAME="chrome-lin64.tar.gz"
