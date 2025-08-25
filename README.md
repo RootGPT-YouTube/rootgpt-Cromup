@@ -6,5 +6,3 @@ This command will download the needed files for Cromite Browser installation (Cr
 If Cromite is already installed with my script, you can update the browser with `cromup` terminal command.  
 Enjoy the best browser!  
 If you find bugs, report it to me, thx!
-
-* Thx to DreamsProgrammer for the personalized icon!
