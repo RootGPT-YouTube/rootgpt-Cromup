@@ -18,6 +18,8 @@ KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu $HOME/.cache/*plasma* 
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 
+# Richiesta di password di root
+sudo echo -e "\e[1;32mRichiesta di password di root o amministratore:\e[0m"
 # Installazione di pv (se non presente)
 echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
 if ! command -v pv &> /dev/null; then
@@ -37,7 +39,7 @@ if ! command -v pv &> /dev/null; then
 fi
 
 # Scarica il file
-sudo echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
+echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
 mkdir -p "$DOWNLOAD_DIR"
 wget -O "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
 
