@@ -19,7 +19,9 @@ DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 
 # Richiesta di password di root
-sudo echo -e "\e[1;32mRichiesta di password di root o amministratore:\e[0m"
+echo -e "\e[1;32mRichiesta di password di root o amministratore:\e[0m"
+sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
+
 # Installazione di pv (se non presente)
 echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
 if ! command -v pv &> /dev/null; then
