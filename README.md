@@ -1,5 +1,6 @@
 # rootgpt-rep: cromup
 Instruction:  
+  
 LINUX:  
 Open terminal and copy and paste this command:  
 `sudo git clone https://github.com/RootGPT-YouTube/rootgpt-Cromup.git && sudo chmod a+x ~/rootgpt-Cromup/install.sh && ~/rootgpt-Cromup/install.sh`  
