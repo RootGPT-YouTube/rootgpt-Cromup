@@ -31,7 +31,7 @@ Se Cromite è già stato installato tramite il mio script, puoi aggiornare il br
   
 WINDOWS:  
 Scarica il file WinCromup.bat (`https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/WinCromup.bat`)  
-Fai clic con il tasto destro sul file WinCromup.bat scaricato e seleziona Esegui come amministratore.  
+Fai clic con il tasto destro sul file WinCromup.bat scaricato e seleziona `Esegui come amministratore`.  
 Il browser Cromite verrà installato e sarà pronto per essere avviato dal menu Start in pochi minuti (Cromite è stato creato da UAZO, non è opera mia).  
 Se il browser Cromite è già stato installato tramite il mio script, puoi aggiornarlo in qualsiasi momento usando lo stesso metodo con WinCromup.bat.  
   
