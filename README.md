@@ -25,18 +25,18 @@ IT
 Istruzioni:
 
 LINUX:  
-Apri il terminale e copia e incolla questo comando: sudo git clone https://github.com/RootGPT-YouTube/rootgpt-Cromup.git && sudo chmod a+x ~/rootgpt-Cromup/install.sh && ~/rootgpt-Cromup/install.sh  
+Apri il terminale e copia e incolla questo comando: `sudo git clone https://github.com/RootGPT-YouTube/rootgpt-Cromup.git && sudo chmod a+x ~/rootgpt-Cromup/install.sh && ~/rootgpt-Cromup/install.sh`  
 Questo comando scaricherà i file necessari per l’installazione del browser Cromite (Cromite è stato creato da UAZO, non è opera mia) e lo installerà.  
-Se Cromite è già stato installato tramite il mio script, puoi aggiornare il browser usando il comando cromup nel terminale.  
+Se Cromite è già stato installato tramite il mio script, puoi aggiornare il browser usando il comando `cromup` nel terminale.  
   
 WINDOWS:  
-Scarica il file WinCromup.bat (https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/WinCromup.bat)  
+Scarica il file WinCromup.bat (`https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/WinCromup.bat`)  
 Fai clic con il tasto destro sul file WinCromup.bat scaricato e seleziona Esegui come amministratore.  
 Il browser Cromite verrà installato e sarà pronto per essere avviato dal menu Start in pochi minuti (Cromite è stato creato da UAZO, non è opera mia).  
 Se il browser Cromite è già stato installato tramite il mio script, puoi aggiornarlo in qualsiasi momento usando lo stesso metodo con WinCromup.bat.  
   
 ANDROID:  
-Scarica direttamente il file APK dal repository GitHub del creatore (Uazo) con il tuo dispositivo Android e installalo: https://github.com/uazo/cromite/releases/latest/download/arm64_ChromePublic.apk  
+Scarica direttamente il file APK dal repository GitHub del creatore (Uazo) con il tuo dispositivo Android e installalo: `https://github.com/uazo/cromite/releases/latest/download/arm64_ChromePublic.apk`  
 Gli aggiornamenti saranno comunicati direttamente dal browser e potranno essere applicati cliccando sulla notifica che apparirà ogni volta che sarà disponibile un aggiornamento.  
 
 Goditi il miglior browser!  
