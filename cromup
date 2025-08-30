@@ -31,14 +31,33 @@ if ! command -v pv &> /dev/null; then
     elif command -v apt &> /dev/null; then
         sudo apt install pv -y
     elif command -v pacman &> /dev/null; then
-        sudo pacman -S --noconfirm pv
+        sudo pacman -Syu --noconfirm pv
     elif command -v zypper &> /dev/null; then
         sudo zypper install pv -y
     else
-        echo -e "\e[1;32mImpossibile installare pv automaticamente. Installalo manualmente.\e[0m"
+        echo -e "\e[1;32mImpossibile installare pv automaticamente, è necessario installarlo manualmente.\e[0m"
         exit 1
     fi
 fi
+
+# Installazione di wget (se non presente)
+echo -e "\e[1;32mVerifica e installazione delle dipendenze: software wget...\e[0m"
+if ! command -v wget &> /dev/null; then
+    echo -e "\e[1;32mwget non trovato, installazione in corso...\e[0m"
+    if command -v dnf &> /dev/null; then
+        sudo dnf install wget -y
+    elif command -v apt &> /dev/null; then
+        sudo apt install wget -y
+    elif command -v pacman &> /dev/null; then
+        sudo pacman -Syu --noconfirm wget
+    elif command -v zypper &> /dev/null; then
+        sudo zypper install wget -y
+    else
+        echo -e "\e[1;32mImpossibile installare wget automaticamente, è necessario installarlo manualmente.\e[0m"
+        exit 1
+    fi
+fi
+
 
 # Scarica il file
 echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
