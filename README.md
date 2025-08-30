@@ -10,7 +10,7 @@ If Cromite is already installed with my script, you can update the browser with 
   
 WINDOWS:  
 Download WinCromup.bat (`https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/WinCromup.bat`)  
-Right click on downloaded WinCromup.bat files and `Run like Administrator`.  
+Right click on downloaded WinCromup.bat files and `Run as Administrator`.  
 Cromite Browser will be installed and ready to launch from the Start menu link in just a few minutes (Cromite is created by UAZO, is not my work).  
 If Cromite Browser is already installed with my script, you can update the browser anytime in the same method with WinCromup.bat.  
   
