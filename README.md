@@ -9,7 +9,7 @@ This command will download the needed files for Cromite Browser installation (Cr
 If Cromite is already installed with my script, you can update the browser with `cromup` terminal command. Cromite Browser must not be running during the update.  
   
 WINDOWS:  
-Download WinCromup.bat (`https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/WinCromup.bat`)  
+Download WinCromup.bat (`https://github.com/RootGPT-YouTube/rootgpt-Cromup/blob/main/WinCromup.bat`)  
 Double-click it.  
 Cromite Browser will be installed and ready to launch from the Start menu link in just a few minutes (Cromite is created by UAZO, is not my work).  
 If Cromite Browser is already installed with my script, you can update the browser anytime in the same method with WinCromup.bat.  
@@ -30,7 +30,7 @@ Questo comando scaricherà i file necessari per l’installazione del browser Cr
 Se Cromite è già stato installato tramite il mio script, puoi aggiornare il browser usando il comando `cromup` nel terminale. Cromite Browser non deve essere in esecuzione durante l'aggiornamento.  
   
 WINDOWS:  
-Scarica il file WinCromup.bat (`https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/WinCromup.bat`)  
+Scarica il file WinCromup.bat (`https://github.com/RootGPT-YouTube/rootgpt-Cromup/blob/main/WinCromup.bat`)  
 Doppio click sul file scaricato.  
 Il browser Cromite verrà installato e sarà pronto per essere avviato dal menu Start in pochi minuti (Cromite è stato creato da UAZO, non è opera mia).  
 Se il browser Cromite è già stato installato tramite il mio script, puoi aggiornarlo in qualsiasi momento usando lo stesso metodo con WinCromup.bat.  
