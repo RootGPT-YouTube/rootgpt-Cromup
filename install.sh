@@ -137,5 +137,5 @@ echo -e "  • Desktop entry (globale): $DESKTOP_GLOBAL"
 sleep 3
 echo -e "\e[1;33mℹ️  Se l’icona non dovesse comparire subito nel menu, provare a fare logout o a riavviare il DE o il PC.\e[0m"
 sleep 3
-echo -e "\e[1;32mPremi INVIO per uscire…\e[0m"
-read -r
+echo -e "\e[1;32mFine installazione di Cromite Browser e di cromup. Chiusura in 5 secondi...\e[0m"
+sleep 5
