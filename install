@@ -1,0 +1,26 @@
+# == Installazione di Cromup via curl ==
+echo -e "\e[1;32mRichiesta di password di root o amministratore:\e[0m"
+
+# == Installazione di git (se non presente) ==
+sudo echo -e "\e[1;32mVerifica e installazione delle dipendenze: software git...\e[0m"
+if ! command -v git &> /dev/null; then
+    echo -e "\e[1;32mgit non trovato, installazione in corso...\e[0m"
+    if command -v dnf &> /dev/null; then
+        sudo dnf install git -y
+    elif command -v apt &> /dev/null; then
+        sudo apt install git -y
+    elif command -v pacman &> /dev/null; then
+        sudo pacman -Syu --noconfirm git
+    elif command -v zypper &> /dev/null; then
+        sudo zypper install git -y
+    else
+        echo -e "\e[1;32mImpossibile installare git automaticamente, è necessario installarlo manualmente.\e[0m"
+        exit 1
+    fi
+fi
+
+# == Clonazione del repository ==
+git clone https://github.com/RootGPT-YouTube/rootgpt-Cromup.git
+
+# == Aggiunta dell'opzione eseguibile al file install.sh e sua esecuzione ==
+sudo chmod a+x ~/rootgpt-Cromup/install.sh && ~/rootgpt-Cromup/install.sh
