@@ -58,7 +58,7 @@ if ! command -v wget &> /dev/null; then
         exit 1
     fi
 fi
-
+sleep 3
 
 # Scarica il file
 echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
