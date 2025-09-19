@@ -115,4 +115,5 @@ sudo chmod a+x "$CROMUP_PATH"
 # Fine script
 echo -e "\e[1;32mVerifica Cromite Browser...\e[0m"
 sleep 3
-echo -e "\e[1;32mTutto ok!\e[0m"
+echo -e "\e[1;32mTutto ok! Termine dell'installazione in corso...\e[0m"
+sleep 3
