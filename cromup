@@ -21,6 +21,7 @@ DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 # Richiesta di password di root
 echo -e "\e[1;32mRichiesta di password di root o amministratore:\e[0m"
 sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
+sleep 3
 
 # Installazione di pv (se non presente)
 echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
@@ -69,6 +70,7 @@ mkdir -p "$CROMITE_DIR"
 
 # Elimina i file .manifest nelle sottocartelle di Cromite
 echo -e "\e[1;32mPulizia dei files .manifest delle vecchie versioni...\e[0m"
+sleep 3
 find "$CROMITE_DIR" -type f -name "*.manifest" -exec rm -f {} +
 
 # Copia nuova icona
@@ -82,6 +84,7 @@ pv -p -e -L 20000000 -s "$(stat -c%s "$DOWNLOAD_DIR/$FILE_NAME")" "$DOWNLOAD_DIR
 
 # Sposta i file e cartelle e pulizia files ridondanti
 echo -e "\e[1;32mInstallazione dei nuovi files di Cromite e pulizia dei files ridondanti...\e[0m"
+sleep 3
 cp -r "$CROMITE_DIR/chrome-lin/"* "$CROMITE_DIR/"
 rm -rf "$CROMITE_DIR/chrome-lin"
 rm "$DOWNLOAD_DIR/$FILE_NAME"
@@ -104,10 +107,12 @@ fi
 
 # Aggiornamento cromup
 echo -e "\e[1;32mVerifica aggiornamenti cromup online...\e[0m"
+sleep 3
 wget -O "$CROMUP_DIR" "$CROMUP_URL"
 sudo cp "$CROMUP_DIR" "$CROMUP_PATH"
 sudo chmod a+x "$CROMUP_PATH"
 
 # Fine script
 echo -e "\e[1;32mVerifica Cromite Browser...\e[0m"
+sleep 3
 echo -e "\e[1;32mTutto ok!\e[0m"
