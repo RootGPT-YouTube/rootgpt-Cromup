@@ -2,11 +2,14 @@
 #set -euo pipefail
 
 echo -e "\e[1;32mCreazione e installazione del comando cromup...\e[0m"
+sleep 3
 sudo chmod a+x ~/rootgpt-Cromup/cromup
 sudo cp ~/rootgpt-Cromup/cromup /usr/local/bin/
 echo -e "\e[1;32mSto per avviare cromup per la prima volta.\e[0m"
 echo -e "\e[1;32mcromup è il comando da terminale necessario per installare e aggiornare Cromite Browser.\e[0m"
+sleep 3
 echo -e "\e[1;32mDa ora in poi, quando vorrai aggiornare Cromite, ti basterà lanciare cromup da terminale.\e[0m"
+sleep 3
 echo -e "\e[1;32mPremere un tasto per installare Cromite adesso tramite cromup oppure CTRL+c per interrompere la procedura...\e[0m"
 read
 cromup
@@ -72,10 +75,12 @@ WORKING_DIR="$HOME/rootgpt-Cromup"
 
 # Eliminazione eventuali Cromite.desktop precedenti
 echo -e "\e[1;32m✅ Tentativo di rimozione di collegamenti nel menù creati da precedenti installazioni...\e[0m"
+sleep 3
 sudo rm -f "$DESKTOP_LOCAL"
 sudo rm -f "$DESKTOP_GLOBAL"
 
 echo -e "\e[1;32mCreazione collegamento nel menù delle applicazioni...\e[0m"
+sleep 3
 
 # Scarica icona
 sudo curl -fsSL -o "$ICON_DEST" "$ICON_URL"
@@ -117,9 +122,10 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   killall plasmashell && kstart5 plasmashell
   echo "✅ Cache KDE aggiornata."
 fi
-
+sleep 3
 #Eliminazione cartella di lavoro
 echo -e "\e[1;32mEliminazione cartella di lavoro...\e[0m"
+sleep 3
 sudo rm -fr "$WORKING_DIR"
 
 # Output finale
@@ -127,6 +133,8 @@ echo -e "\e[1;32m✅ Cromite installato correttamente!\e[0m"
 echo -e "  • Icona salvata in: $ICON_DEST"
 echo -e "  • Desktop entry (utente): $DESKTOP_LOCAL"
 echo -e "  • Desktop entry (globale): $DESKTOP_GLOBAL"
+sleep 3
 echo -e "\e[1;33mℹ️  Se l’icona non dovesse comparire subito nel menu, provare a fare logout o a riavviare il DE o il PC.\e[0m"
+sleep 3
 echo -e "\e[1;32mPremi INVIO per uscire…\e[0m"
 read -r
