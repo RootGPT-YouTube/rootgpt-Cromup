@@ -65,7 +65,8 @@ sleep 3
 # Scarica il file
 echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
 mkdir -p "$DOWNLOAD_DIR"
-wget -O "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
+# wget -O "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
+curl -L --progress-bar -o "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
 
 # Crea la directory di destinazione se non esiste
 mkdir -p "$CROMITE_DIR"
