@@ -22,7 +22,7 @@ DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 
 # Richiesta di password di root
-echo -e "\e[1;32mRichiesta di password di root o amministratore:\e[0m"
+echo -e "\e[1;32mRichiesta di password di root o amministratore (se non già inserita in precedenza):\e[0m"
 sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
 
 # == Chiusura di Cromite se aperto ==
