@@ -4,6 +4,7 @@
 APP_NAME="Cromite"
 DOWNLOAD_DIR="$HOME"
 CROMITE_DIR="$HOME/Cromite"
+# Download originale
 # FILE_URL="https://github.com/uazo/cromite/releases/latest/download/chrome-lin64.tar.gz"
 # Download temporaneo per bugs
 FILE_URL="https://github.com/uazo/cromite/releases/download/Fix-2326/chrome-lin64.tar.gz"
