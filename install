@@ -1,6 +1,9 @@
 # == Installazione di Cromup via curl ==
 echo -e "\e[1;32mRichiesta di password di root o amministratore:\e[0m"
 
+# == Chiusura di Cromite se aperto ==
+sudo pkill -9 cromite
+
 # == Installazione di git (se non presente) ==
 sudo echo -e "\e[1;32mVerifica e installazione delle dipendenze: software git...\e[0m"
 sleep 3
