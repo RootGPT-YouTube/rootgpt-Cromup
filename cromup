@@ -24,6 +24,9 @@ DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 # Richiesta di password di root
 echo -e "\e[1;32mRichiesta di password di root o amministratore:\e[0m"
 sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
+
+# == Chiusura di Cromite se aperto ==
+sudo pkill -9 cromite
 sleep 3
 
 # Installazione di pv (se non presente)
