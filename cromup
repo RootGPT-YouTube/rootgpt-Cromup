@@ -27,7 +27,7 @@ sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
 
 # == Chiusura di Cromite se aperto ==
 sudo pkill -9 cromite
-sleep 3
+sleep 1
 
 # Installazione di pv (se non presente)
 echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
@@ -48,23 +48,23 @@ if ! command -v pv &> /dev/null; then
 fi
 
 # Installazione di wget (se non presente)
-echo -e "\e[1;32mVerifica e installazione delle dipendenze: software wget...\e[0m"
-if ! command -v wget &> /dev/null; then
-    echo -e "\e[1;32mwget non trovato, installazione in corso...\e[0m"
-    if command -v dnf &> /dev/null; then
-        sudo dnf install wget -y
-    elif command -v apt &> /dev/null; then
-        sudo apt install wget -y
-    elif command -v pacman &> /dev/null; then
-        sudo pacman -Syu --noconfirm wget
-    elif command -v zypper &> /dev/null; then
-        sudo zypper install wget -y
-    else
-        echo -e "\e[1;32mImpossibile installare wget automaticamente, è necessario installarlo manualmente.\e[0m"
-        exit 1
-    fi
-fi
-sleep 3
+# echo -e "\e[1;32mVerifica e installazione delle dipendenze: software wget...\e[0m"
+# if ! command -v wget &> /dev/null; then
+#    echo -e "\e[1;32mwget non trovato, installazione in corso...\e[0m"
+#    if command -v dnf &> /dev/null; then
+#        sudo dnf install wget -y
+#    elif command -v apt &> /dev/null; then
+#        sudo apt install wget -y
+#   elif command -v pacman &> /dev/null; then
+#        sudo pacman -Syu --noconfirm wget
+#    elif command -v zypper &> /dev/null; then
+#        sudo zypper install wget -y
+#    else
+#        echo -e "\e[1;32mImpossibile installare wget automaticamente, è necessario installarlo manualmente.\e[0m"
+#        exit 1
+#    fi
+#fi
+sleep 2
 
 # Scarica il file
 echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
@@ -83,7 +83,8 @@ find "$CROMITE_DIR" -type f -name "*.manifest" -exec rm -f {} +
 # Copia nuova icona
 echo -e "\e[1;32mDownload icona personalizzata di Cromite...\e[0m"
 sleep 2
-wget -O "$ICON_NAME_PATH" "$ICON_URL" || { echo -e "\e[1;32mErrore nel download dell'icona!\e[0m"; exit 1; }
+# wget -O "$ICON_NAME_PATH" "$ICON_URL" || { echo -e "\e[1;32mErrore nel download dell'icona!\e[0m"; exit 1; }
+curl -fL --progress-bar -o "$ICON_NAME_PATH" "$ICON_URL" || { echo -e "\e[1;32mErrore nel download dell'icona!\e[0m"; exit 1; }
 sudo cp "$ICON_NAME_PATH" "$ICON_DEST1"
 sudo cp "$ICON_NAME_PATH" "$ICON_DEST2"
 
@@ -117,7 +118,8 @@ fi
 # Aggiornamento cromup
 echo -e "\e[1;32mVerifica aggiornamenti cromup online...\e[0m"
 sleep 3
-wget -O "$CROMUP_DIR" "$CROMUP_URL"
+# wget -O "$CROMUP_DIR" "$CROMUP_URL"
+curl -fL --progress-bar -o "$CROMUP_DIR" "$CROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di cromup!\e[0m"; exit 1; }
 sudo cp "$CROMUP_DIR" "$CROMUP_PATH"
 sudo chmod a+x "$CROMUP_PATH"
 
