@@ -117,10 +117,12 @@ fi
 
 # Aggiornamento cromup
 echo -e "\e[1;32mVerifica aggiornamenti cromup online...\e[0m"
-sleep 3
+sleep 1
 # wget -O "$CROMUP_DIR" "$CROMUP_URL"
 curl -fL --progress-bar -o "$CROMUP_DIR" "$CROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di cromup!\e[0m"; exit 1; }
+sleep 2
 sudo cp "$CROMUP_DIR" "$CROMUP_PATH"
+sleep 1
 sudo chmod a+x "$CROMUP_PATH"
 
 # Fine script
