@@ -6,7 +6,7 @@ LINUX:
 Open terminal and copy and paste this command:  
 `curl -sSL https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/main/install | bash`    
 This command will download the needed files for Cromite Browser installation (Cromite is created by UAZO, is not my work) and will install it.  
-If Cromite is already installed with my script, you can update the browser with `cromup` terminal command. Cromite Browser must not be running during the update.  
+If Cromite is already installed with my script, you can update the browser with `cromup` terminal command and `uncromup` for uninstall Cromite.  
   
 WINDOWS:  
 Download WinCromup.bat (`https://github.com/RootGPT-YouTube/rootgpt-Cromup/blob/main/WinCromup.bat`)  
@@ -27,7 +27,7 @@ Istruzioni:
 LINUX:  
 Apri il terminale e copia e incolla questo comando: `curl -sSL https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/main/install | bash`  
 Questo comando scaricherà i file necessari per l’installazione del browser Cromite (Cromite è stato creato da UAZO, non è opera mia) e lo installerà.  
-Se Cromite è già stato installato tramite il mio script, puoi aggiornare il browser usando il comando `cromup` nel terminale. Cromite Browser non deve essere in esecuzione durante l'aggiornamento.  
+Se Cromite è già stato installato tramite il mio script, puoi aggiornare il browser usando il comando `cromup` nel terminale e `uncromup` invece per disinstallare Cromite.  
   
 WINDOWS:  
 Scarica il file WinCromup.bat (`https://github.com/RootGPT-YouTube/rootgpt-Cromup/blob/main/WinCromup.bat`)  
