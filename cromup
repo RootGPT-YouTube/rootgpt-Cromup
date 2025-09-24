@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Definizione delle variabili
+# == Definizione delle variabili ==
 APP_NAME="Cromite"
 DOWNLOAD_DIR="$HOME"
 CROMITE_DIR="$HOME/Cromite"
@@ -20,6 +20,25 @@ CROMUP_DIR="$HOME/Cromite/cromup"
 KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu $HOME/.cache/*plasma* $HOME/.cache/kactivitymanager-statsrc $HOME/.local/share/applications/Cromite.desktop"
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
+
+# == CONTROLLO VERSIONE ==
+echo -e "\e[1;32mControllo versione di Cromite...\e[0m"
+sleep 2
+remote_date=$(curl -sI "$FILE_URL" | grep -i '^Last-Modified:' | cut -d' ' -f2-)
+remote_epoch=$(date -d "$remote_date" +%s)
+local_file="$CROMITE_DIR/cromite"
+if [ -f "$local_file" ]; then
+    local_epoch=$(stat -c %Y "$local_file")
+else
+    echo -e "\e[1;33mFile locale non trovato, procedo con installazione completa.\e[0m"
+    local_epoch=0
+fi
+
+if [ "$remote_epoch" -le "$local_epoch" ]; then
+    echo -e "\e[1;32mCromite è già aggiornato. Nessuna azione necessaria.\e[0m"
+    exit 0
+fi
+sleep 2
 
 # Richiesta di password di root
 echo -e "\e[1;32mRichiesta di password di root o amministratore (se non già inserita in precedenza):\e[0m"
@@ -117,12 +136,10 @@ fi
 
 # Aggiornamento cromup
 echo -e "\e[1;32mVerifica aggiornamenti cromup online...\e[0m"
-sleep 1
+sleep 3
 # wget -O "$CROMUP_DIR" "$CROMUP_URL"
 curl -fL --progress-bar -o "$CROMUP_DIR" "$CROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di cromup!\e[0m"; exit 1; }
-sleep 2
 sudo cp "$CROMUP_DIR" "$CROMUP_PATH"
-sleep 1
 sudo chmod a+x "$CROMUP_PATH"
 
 # Fine script
