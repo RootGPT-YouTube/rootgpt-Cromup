@@ -17,6 +17,9 @@ ICON_DEST2="/usr/share/icons/hicolor/192x192/apps/cromite"
 CROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromup"
 CROMUP_PATH="/usr/local/bin/cromup"
 CROMUP_DIR="$HOME/Cromite/cromup"
+UNCROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/uncromup"
+UNCROMUP_PATH="/usr/local/bin/uncromup"
+UNCROMUP_DIR="$HOME/Cromite/uncromup"
 KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu $HOME/.cache/*plasma* $HOME/.cache/kactivitymanager-statsrc $HOME/.local/share/applications/Cromite.desktop"
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
@@ -40,7 +43,7 @@ if [ "$remote_epoch" -le "$local_epoch" ]; then
 fi
 sleep 2
 
-# Richiesta di password di root
+# == Richiesta di password di root ==
 echo -e "\e[1;32mRichiesta di password di root o amministratore (se non già inserita in precedenza):\e[0m"
 sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
 
@@ -48,7 +51,7 @@ sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
 sudo pkill -9 cromite
 sleep 1
 
-# Installazione di pv (se non presente)
+# == Installazione di pv (se non presente) ==
 echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
 if ! command -v pv &> /dev/null; then
     echo -e "\e[1;32mpv non trovato, installazione in corso...\e[0m"
@@ -85,21 +88,21 @@ fi
 #fi
 sleep 2
 
-# Scarica il file
+# == Scarica il file ==
 echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
 mkdir -p "$DOWNLOAD_DIR"
 # wget -O "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
 curl -L --progress-bar -o "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
 
-# Crea la directory di destinazione se non esiste
+# == Crea la directory di destinazione se non esiste ==
 mkdir -p "$CROMITE_DIR"
 
-# Elimina i file .manifest nelle sottocartelle di Cromite
+# == Elimina i file .manifest nelle sottocartelle di Cromite ==
 echo -e "\e[1;32mPulizia dei files .manifest delle vecchie versioni...\e[0m"
 sleep 3
 find "$CROMITE_DIR" -type f -name "*.manifest" -exec rm -f {} +
 
-# Copia nuova icona
+# == Copia nuova icona ==
 echo -e "\e[1;32mDownload icona personalizzata di Cromite...\e[0m"
 sleep 2
 # wget -O "$ICON_NAME_PATH" "$ICON_URL" || { echo -e "\e[1;32mErrore nel download dell'icona!\e[0m"; exit 1; }
@@ -107,11 +110,11 @@ curl -fL --progress-bar -o "$ICON_NAME_PATH" "$ICON_URL" || { echo -e "\e[1;32mE
 sudo cp "$ICON_NAME_PATH" "$ICON_DEST1"
 sudo cp "$ICON_NAME_PATH" "$ICON_DEST2"
 
-# Estrazione con barra di avanzamento tramite pv
+# == Estrazione con barra di avanzamento tramite pv ==
 echo -e "\e[1;32mEstrazione del file archivio di Cromite...\e[0m"
 pv -p -e -L 20000000 -s "$(stat -c%s "$DOWNLOAD_DIR/$FILE_NAME")" "$DOWNLOAD_DIR/$FILE_NAME" | tar -xz -f - -C "$CROMITE_DIR" --overwrite || { echo -e "\e[1;32mErrore nell'estrazione!\e[0m"; exit 1; }
 
-# Sposta i file e cartelle e pulizia files ridondanti
+# == Sposta i file e cartelle e pulizia files ridondanti ==
 echo -e "\e[1;32mInstallazione dei nuovi files di Cromite e pulizia dei files ridondanti...\e[0m"
 sleep 3
 cp -r "$CROMITE_DIR/chrome-lin/"* "$CROMITE_DIR/"
@@ -120,7 +123,7 @@ rm "$DOWNLOAD_DIR/$FILE_NAME"
 cp "$CROMITE_DIR/chrome" "$CROMITE_DIR/cromite"
 rm "$CROMITE_DIR/chrome"
 
-# Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache
+# == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
 if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   if [ -f "$KDE_MENU" ]; then
     echo "🧹 Rimuovo override utente da KDE menu..."
@@ -134,7 +137,15 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   echo "✅ Cache KDE aggiornata."
 fi
 
-# Aggiornamento cromup
+# == Installazione di uncromup ==
+echo -e "\e[1;32mVerifica di aggiornamenti di uncromup online...\e[0m"
+sleep 3
+# wget -O "$UNCROMUP_DIR" "$UNCROMUP_URL"
+curl -fL --progress-bar -o "$UNCROMUP_DIR" "$UNCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di uncromup!\e[0m"; exit 1; }
+sudo cp "$UNCROMUP_DIR" "$UNCROMUP_PATH"
+sudo chmod a+x "$UNCROMUP_PATH"
+
+# == Aggiornamento cromup ==
 echo -e "\e[1;32mVerifica aggiornamenti cromup online...\e[0m"
 sleep 3
 # wget -O "$CROMUP_DIR" "$CROMUP_URL"
@@ -142,7 +153,7 @@ curl -fL --progress-bar -o "$CROMUP_DIR" "$CROMUP_URL" || { echo -e "\e[1;32mErr
 sudo cp "$CROMUP_DIR" "$CROMUP_PATH"
 sudo chmod a+x "$CROMUP_PATH"
 
-# Fine script
+# == Fine script ==
 echo -e "\e[1;32mVerifica Cromite Browser...\e[0m"
 sleep 3
 echo -e "\e[1;32mTutto ok!\e[0m"

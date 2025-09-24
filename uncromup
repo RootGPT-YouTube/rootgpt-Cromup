@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# == Richiesta di password di root ==
+echo -e "\e[1;32mRichiesta di password di root o amministratore (se non già inserita in precedenza):\e[0m"
+sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
+sleep 1
+
+# == Chiusura di Cromite se aperto ==
+sudo echo -e "\e[1;32mChiusura del Browser Cromite...\e[0m"
+sudo pkill -9 cromite
+sleep 1
+
+# == Inizio disinstallazione Cromite ==
+sudo echo -e "\e[1;32mRimozione cartella ~/Cromite...\e[0m"
+sleep 1
+sudo rm -fr ~/Cromite
+sudo echo -e "\e[1;32mRimozione icona e collegamenti nel menu start...\e[0m"
+sleep 1
+sudo rm -fr /usr/share/icons/hicolor/192x192/apps/cromite.png
+sudo rm -fr /usr/share/icons/hicolor/192x192/apps/cromite
+sudo rm -fr /usr/local/bin/cromup
+sudo rm -fr ~/.local/share/applications/Cromite.desktop
+sudo rm -fr /usr/share/applications/Cromite.desktop
+
+# == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
+if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
+  if [ -f "$KDE_MENU" ]; then
+    echo "Rimuovo override utente da KDE menu..."
+    rm -fr "$KDE_MENU"
+  fi
+  echo "Ricostruisco cache SYCOCA..."
+  sudo gtk-update-icon-cache /usr/share/icons/hicolor
+  sudo cp "$DESKTOP_GLOBAL" "$DESKTOP_LOCAL"
+  kbuildsycoca6 --noincremental
+  killall plasmashell && kstart5 plasmashell
+  echo "✅ Cache KDE aggiornata."
+fi
+
+# == Fine disinstallazione Cromite Browser ==
+sudo echo -e "\e[1;32mCromite Browser rimosso dal sistema. Fra pochi secondi lo script terminerà.\e[0m"
+sudo rm -fr /usr/local/bin/uncromup
+sleep 3
