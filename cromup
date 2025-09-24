@@ -131,7 +131,7 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   fi
   echo "🔄 Ricostruisco cache SYCOCA..."
   sudo gtk-update-icon-cache /usr/share/icons/hicolor
-  sudo cp "$DESKTOP_GLOBAL" "$DESKTOP_LOCAL"
+  sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
   kbuildsycoca6 --noincremental
   killall plasmashell && kstart5 plasmashell
   echo "✅ Cache KDE aggiornata."
