@@ -40,7 +40,14 @@ else
 fi
 
 if [ "$remote_epoch" -le "$local_epoch" ]; then
-    echo -e "\e[1;32mCromite è già aggiornato. Nessuna azione necessaria.\e[0m"
+    echo -e "\e[1;32mCromite è già aggiornato. Proseguo con altre verifiche...\e[0m"
+# == Installazione di upcromup ==
+    echo -e "\e[1;32mVerifica di aggiornamenti di upcromup online...\e[0m"
+sleep 3
+    # wget -O "$UPCROMUP_DIR" "$UPCROMUP_URL"
+    curl -fL --progress-bar -o "$UPCROMUP_DIR" "$UPCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di upcromup!\e[0m"; exit 1; }
+    sudo chmod a+x "$UPCROMUP_DIR"
+    ~/Cromite/upcromup
     exit 0
 fi
 sleep 2
