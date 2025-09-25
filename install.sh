@@ -14,6 +14,7 @@ sleep 5
 echo -e "\e[1;32mL'installazione di Cromite avverrà tra 5 secondi tramite cromup. Premere CTRL+c per interrompere la procedura...\e[0m"
 sleep 6
 cromup
+sleep 6
 
 # Se usare link_menu.sh decommentare le due righe sotto
 # sudo chmod a+x link_menu.sh

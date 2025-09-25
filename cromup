@@ -153,4 +153,4 @@ sleep 3
 # wget -O "$UPCROMUP_DIR" "$UPCROMUP_URL"
 curl -fL --progress-bar -o "$UPCROMUP_DIR" "$UPCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di upcromup!\e[0m"; exit 1; }
 sudo chmod a+x "$UPCROMUP_DIR"
-"$UPCROMUP_DIR"
+~/Cromite/upcromup
