@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# == Variabili ==
+CROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromup"
+CROMUP_PATH="/usr/local/bin/cromup"
+CROMUP_DIR="$HOME/Cromite/cromup"
+
 # == Aggiornamento cromup ==
 echo -e "\e[1;32mVerifica aggiornamenti cromup online...\e[0m"
 sleep 3
@@ -12,4 +17,6 @@ sudo chmod a+x "$CROMUP_PATH"
 echo -e "\e[1;32mVerifica finale...\e[0m"
 sleep 3
 echo -e "\e[1;32mTutto ok!\e[0m"
+sleep 1
+echo -e "\e[1;32mFra pochi secondi lo script terminerà.\e[0m"
 sleep 3

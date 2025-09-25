@@ -20,6 +20,8 @@ CROMUP_DIR="$HOME/Cromite/cromup"
 UNCROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/uncromup"
 UNCROMUP_PATH="/usr/local/bin/uncromup"
 UNCROMUP_DIR="$HOME/Cromite/uncromup"
+UPCROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/upcromup"
+UPCROMUP_DIR="$HOME/Cromite/upcromup"
 KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu $HOME/.cache/*plasma* $HOME/.cache/kactivitymanager-statsrc $HOME/.local/share/applications/Cromite.desktop"
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
@@ -145,16 +147,10 @@ curl -fL --progress-bar -o "$UNCROMUP_DIR" "$UNCROMUP_URL" || { echo -e "\e[1;32
 sudo cp "$UNCROMUP_DIR" "$UNCROMUP_PATH"
 sudo chmod a+x "$UNCROMUP_PATH"
 
-# == Aggiornamento cromup ==
-echo -e "\e[1;32mVerifica aggiornamenti cromup online...\e[0m"
+# == Installazione di upcromup ==
+echo -e "\e[1;32mVerifica di aggiornamenti di upcromup online...\e[0m"
 sleep 3
-# wget -O "$CROMUP_DIR" "$CROMUP_URL"
-curl -fL --progress-bar -o "$CROMUP_DIR" "$CROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di cromup!\e[0m"; exit 1; }
-sudo cp "$CROMUP_DIR" "$CROMUP_PATH"
-sudo chmod a+x "$CROMUP_PATH"
-
-# == Fine script ==
-echo -e "\e[1;32mVerifica Cromite Browser...\e[0m"
-sleep 3
-echo -e "\e[1;32mTutto ok!\e[0m"
-sleep 3
+# wget -O "$UPCROMUP_DIR" "$UPCROMUP_URL"
+curl -fL --progress-bar -o "$UPCROMUP_DIR" "$UPCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di upcromup!\e[0m"; exit 1; }
+sudo chmod a+x "$UPCROMUP_DIR"
+"$UPCROMUP_DIR"
