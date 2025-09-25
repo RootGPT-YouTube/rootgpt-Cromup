@@ -17,6 +17,4 @@ sudo chmod a+x "$CROMUP_PATH"
 echo -e "\e[1;32mVerifica finale...\e[0m"
 sleep 3
 echo -e "\e[1;32mTutto ok!\e[0m"
-sleep 1
-echo -e "\e[1;32mCromite Browser pronto all'uso! Attendere alcuni secondi...\e[0m"
-sleep 1
+sleep 3
