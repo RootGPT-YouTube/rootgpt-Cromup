@@ -134,7 +134,7 @@ sudo rm -fr "$WORKING_DIR"
 echo -e "\e[1;32m✅ Cromite installato correttamente!\e[0m"
 echo -e "  • Icona salvata in: $ICON_DEST"
 echo -e "  • Desktop entry (utente): $DESKTOP_LOCAL"
-echo -e "  • Desktop entry (globale): $DESKTOP_GLOBAL"
+# echo -e "  • Desktop entry (globale): $DESKTOP_GLOBAL"
 sleep 3
 echo -e "\e[1;33mℹ️  Se l’icona non dovesse comparire subito nel menu, provare a fare logout o a riavviare il DE o il PC.\e[0m"
 sleep 3
