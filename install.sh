@@ -109,7 +109,7 @@ NoDisplay=false
 EOF
 
 # Copia il file .desktop nella directory globale
-sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
+# sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
 
 # Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache
 if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
