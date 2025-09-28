@@ -144,13 +144,21 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   if [ -f "$KDE_MENU" ]; then
     echo "🧹 Rimuovo override utente da KDE menu..."
     rm -fr "$KDE_MENU"
+    sleep 1
   fi
   echo "🔄 Ricostruisco cache SYCOCA..."
   sudo gtk-update-icon-cache /usr/share/icons/hicolor
-  sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
+  sleep 2
+  # sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
+  sleep 2
   kbuildsycoca6 --noincremental
-  killall plasmashell && kstart5 plasmashell
+  sleep 2
+  killall plasmashell
+  sleep 3
+  kstart5 plasmashell
+  sleep 2
   echo "✅ Cache KDE aggiornata."
+  sleep 1
 fi
 
 # == Installazione di uncromup ==
