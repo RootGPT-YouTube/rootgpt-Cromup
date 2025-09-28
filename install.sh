@@ -280,20 +280,22 @@ EOF
 if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   if [ -f "$KDE_MENU" ]; then
     echo "🧹 Rimuovo override utente da KDE menu..."
+    sleep 1
     rm -fr "$KDE_MENU"
   fi
   echo "🔄 Ricostruisco cache SYCOCA..."
   sudo gtk-update-icon-cache /usr/share/icons/hicolor
+  sleep 1
   # sudo cp "$DESKTOP_GLOBAL" "$DESKTOP_LOCAL"
   kbuildsycoca6 --noincremental
-  sleep 1
-  killall plasmashell
   sleep 2
+  killall plasmashell
+  sleep 3
   kstart5 plasmashell
   sleep 1
   echo "✅ Cache KDE aggiornata."
 fi
-sleep 3
+sleep 1
 # == Eliminazione cartella di lavoro ==
 echo -e "\e[1;32mEliminazione cartella di lavoro...\e[0m"
 sleep 3
