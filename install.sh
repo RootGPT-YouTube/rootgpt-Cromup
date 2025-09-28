@@ -156,18 +156,18 @@ cp "$CROMITE_DIR/chrome" "$CROMITE_DIR/cromite"
 rm "$CROMITE_DIR/chrome"
 
 # == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
-if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
-  if [ -f "$KDE_MENU" ]; then
-    echo "🧹 Rimuovo override utente da KDE menu..."
-    rm -fr "$KDE_MENU"
-  fi
-  echo "🔄 Ricostruisco cache SYCOCA..."
-  sudo gtk-update-icon-cache /usr/share/icons/hicolor
-  #sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
-  kbuildsycoca6 --noincremental
-  killall plasmashell && kstart5 plasmashell
-  echo "✅ Cache KDE aggiornata."
-fi
+#if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
+#  if [ -f "$KDE_MENU" ]; then
+#    echo "🧹 Rimuovo override utente da KDE menu..."
+#    rm -fr "$KDE_MENU"
+#  fi
+#  echo "🔄 Ricostruisco cache SYCOCA..."
+#  sudo gtk-update-icon-cache /usr/share/icons/hicolor
+#  #sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
+#  kbuildsycoca6 --noincremental
+#  killall plasmashell && kstart5 plasmashell
+#  echo "✅ Cache KDE aggiornata."
+#fi
 
 # == Installazione di uncromup ==
 echo -e "\e[1;32mVerifica di aggiornamenti di uncromup online...\e[0m"
@@ -286,7 +286,11 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   sudo gtk-update-icon-cache /usr/share/icons/hicolor
   # sudo cp "$DESKTOP_GLOBAL" "$DESKTOP_LOCAL"
   kbuildsycoca6 --noincremental
-  killall plasmashell && kstart5 plasmashell
+  sleep 1
+  killall plasmashell
+  sleep 2
+  kstart5 plasmashell
+  sleep 1
   echo "✅ Cache KDE aggiornata."
 fi
 sleep 3
