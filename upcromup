@@ -18,3 +18,4 @@ echo -e "\e[1;32mVerifica finale...\e[0m"
 sleep 3
 echo -e "\e[1;32mTutto ok!\e[0m"
 sleep 3
+exit 0
