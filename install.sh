@@ -38,7 +38,7 @@ UPCROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/r
 UPCROMUP_DIR="$HOME/Cromite/upcromup"
 KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu $HOME/.cache/*plasma* $HOME/.cache/kactivitymanager-statsrc $HOME/.local/share/applications/Cromite.desktop"
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
-DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
+# DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 EXEC_PATH="$HOME/Cromite/cromite"
 WORKING_DIR="$HOME/rootgpt-Cromup"
 
@@ -163,7 +163,7 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   fi
   echo "🔄 Ricostruisco cache SYCOCA..."
   sudo gtk-update-icon-cache /usr/share/icons/hicolor
-  sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
+  #sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
   kbuildsycoca6 --noincremental
   killall plasmashell && kstart5 plasmashell
   echo "✅ Cache KDE aggiornata."
@@ -274,7 +274,7 @@ NoDisplay=false
 EOF
 
 # == Copia il file .desktop nella directory globale ==
-sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
+# sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
 
 # == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
 if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
@@ -299,7 +299,7 @@ sudo rm -fr "$WORKING_DIR"
 echo -e "\e[1;32m✅ Cromite installato correttamente!\e[0m"
 echo -e "  • Icona salvata in: $ICON_DEST"
 echo -e "  • Desktop entry (utente): $DESKTOP_LOCAL"
-echo -e "  • Desktop entry (globale): $DESKTOP_GLOBAL"
+#echo -e "  • Desktop entry (globale): $DESKTOP_GLOBAL"
 sleep 3
 echo -e "\e[1;33mℹ️  Se l’icona non dovesse comparire subito nel menu, provare a fare logout o a riavviare il DE o il PC.\e[0m"
 sleep 3
