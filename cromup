@@ -24,7 +24,7 @@ UPCROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/r
 UPCROMUP_DIR="$HOME/Cromite/upcromup"
 KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu $HOME/.cache/*plasma* $HOME/.cache/kactivitymanager-statsrc $HOME/.local/share/applications/Cromite.desktop"
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
-DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
+#DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 
 # == CONTROLLO VERSIONE ==
 echo -e "\e[1;32mControllo versione di Cromite...\e[0m"
