@@ -26,6 +26,16 @@ KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu $HOME/.cache/*plasma* 
 DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 #DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
 
+#== Stemma ==
+echo -e "${GREEN}"
+echo "**************************************"
+echo "*                                    *"
+echo "*       Cromup by R∞tGPT             *"
+echo "*       Cromite by Uazo              *"
+echo "*                                    *"
+echo "**************************************"
+echo -e "${RESET}"
+
 # == CONTROLLO VERSIONE ==
 echo -e "\e[1;32mControllo versione di Cromite...\e[0m"
 sleep 2
