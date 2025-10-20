@@ -138,7 +138,7 @@ sudo cp "$ICON_NAME_PATH" "$ICON_DEST2"
 
 # == Estrazione con barra di avanzamento tramite pv ==
 echo -e "\e[1;32mEstrazione del file archivio di Cromite...\e[0m"
-pv -p -e -L 20000000 -s "$(stat -c%s "$DOWNLOAD_DIR/$FILE_NAME")" "$DOWNLOAD_DIR/$FILE_NAME" | tar -xz -f - -C "$CROMITE_DIR" --overwrite || { echo -e "\e[1;32mErrore nell'estrazione!\e[0m"; exit 1; }
+pv -p -e -L 50000000 -s "$(stat -c%s "$DOWNLOAD_DIR/$FILE_NAME")" "$DOWNLOAD_DIR/$FILE_NAME" | tar -xz -f - -C "$CROMITE_DIR" --overwrite || { echo -e "\e[1;32mErrore nell'estrazione!\e[0m"; exit 1; }
 
 # == Sposta i file e cartelle e pulizia files ridondanti ==
 echo -e "\e[1;32mInstallazione dei nuovi files di Cromite e pulizia dei files ridondanti...\e[0m"
