@@ -42,6 +42,16 @@ DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 EXEC_PATH="$HOME/Cromite/cromite"
 WORKING_DIR="$HOME/rootgpt-Cromup"
 
+#== Stemma ==
+echo -e "${GREEN}"
+echo "**************************************"
+echo "*                                    *"
+echo "*       Cromup by R∞tGPT             *"
+echo "*       Cromite by Uazo              *"
+echo "*                                    *"
+echo "**************************************"
+echo -e "${RESET}"
+
 # == CONTROLLO VERSIONE ==
 echo -e "\e[1;32mControllo versione di Cromite...\e[0m"
 sleep 2
@@ -79,9 +89,23 @@ sleep 2
 echo -e "\e[1;32mRichiesta di password di root o amministratore (se non già inserita in precedenza):\e[0m"
 sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
 
-# == Chiusura di Cromite se aperto ==
-sudo pkill -9 cromite
-sleep 1
+# == Installazione di pkill (se non presente) ==
+echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pkill...\e[0m"
+if ! command -v pkill &> /dev/null; then
+    echo -e "\e[1;32mpkill non trovato, installazione in corso...\e[0m"
+    if command -v dnf &> /dev/null; then
+        sudo dnf install pkill -y
+    elif command -v apt &> /dev/null; then
+        sudo apt install pkill -y
+    elif command -v pacman &> /dev/null; then
+        sudo pacman -Syu --noconfirm pkill
+    elif command -v zypper &> /dev/null; then
+        sudo zypper install pkill -y
+    else
+        echo -e "\e[1;32mImpossibile installare pkill automaticamente, è necessario installarlo manualmente.\e[0m"
+        exit 1
+    fi
+fi
 
 # == Installazione di pv (se non presente) ==
 echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
@@ -100,6 +124,10 @@ if ! command -v pv &> /dev/null; then
         exit 1
     fi
 fi
+
+# == Chiusura di Cromite se aperto ==
+sudo pkill -9 cromite
+sleep 1
 
 # Installazione di wget (se non presente)
 # echo -e "\e[1;32mVerifica e installazione delle dipendenze: software wget...\e[0m"
