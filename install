@@ -20,9 +20,6 @@ if ! command -v git &> /dev/null; then
     fi
 fi
 
-# == Chiusura di Cromite se aperto ==
-# sudo pkill -9 cromite
-
 # == Clonazione del repository ==
 sudo echo -e "\e[1;32mClonazione del repository...\e[0m"
 git clone https://github.com/RootGPT-YouTube/rootgpt-Cromup.git

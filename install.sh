@@ -94,13 +94,13 @@ echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pkill...\e[
 if ! command -v pkill &> /dev/null; then
     echo -e "\e[1;32mpkill non trovato, installazione in corso...\e[0m"
     if command -v dnf &> /dev/null; then
-        sudo dnf install pkill -y
+        sudo dnf install procps-ng -y
     elif command -v apt &> /dev/null; then
-        sudo apt install pkill -y
+        sudo apt install procps -y
     elif command -v pacman &> /dev/null; then
-        sudo pacman -Syu --noconfirm pkill
+        sudo pacman -Syu --noconfirm procps-ng
     elif command -v zypper &> /dev/null; then
-        sudo zypper install pkill -y
+        sudo zypper install procps -y
     else
         echo -e "\e[1;32mImpossibile installare pkill automaticamente, è necessario installarlo manualmente.\e[0m"
         exit 1
