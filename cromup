@@ -188,6 +188,8 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   echo "✅ Cache KDE aggiornata."
   sleep 1
 fi
+# == Ignoro output errori da dopo questo punto ==
+exec 2>/dev/null
 
 # == Installazione di uncromup ==
 echo -e "\e[1;32mVerifica di aggiornamenti di uncromup online...\e[0m"
