@@ -167,6 +167,9 @@ rm "$DOWNLOAD_DIR/$FILE_NAME"
 cp "$CROMITE_DIR/chrome" "$CROMITE_DIR/cromite"
 rm "$CROMITE_DIR/chrome"
 
+# == Imposta il timestamp del file locale uguale a quello remoto ==
+touch -d "$remote_date" "$local_file"
+
 # == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
 if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   if [ -f "$KDE_MENU" ]; then
