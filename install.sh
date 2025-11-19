@@ -12,6 +12,7 @@ sleep 5
 echo -e "\e[1;32mDa ora in poi, quando vorrai aggiornare Cromite, ti basterà lanciare cromup da terminale.\e[0m"
 sleep 5
 echo -e "\e[1;32mL'installazione di Cromite avverrà tra 5 secondi tramite cromup. Premere CTRL+c per interrompere la procedura...\e[0m"
+
 # == Definizione delle variabili ==
 APP_NAME="Cromite"
 DOWNLOAD_DIR="$HOME"
@@ -67,6 +68,7 @@ fi
 
 if [ "$remote_epoch" -le "$local_epoch" ]; then
     echo -e "\e[1;32mCromite è già aggiornato. Proseguo con altre verifiche...\e[0m"
+
 # == Installazione di uncromup in caso di Cromite già aggiornato ==
     echo -e "\e[1;32mVerifica di aggiornamenti di uncromup online...\e[0m"
     sleep 3
@@ -74,6 +76,7 @@ if [ "$remote_epoch" -le "$local_epoch" ]; then
     curl -fL --progress-bar -o "$UNCROMUP_DIR" "$UNCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di uncromup!\e[0m"; exit 1; }
     sudo cp "$UNCROMUP_DIR" "$UNCROMUP_PATH"
     sudo chmod a+x "$UNCROMUP_PATH"
+
 # == Installazione di upcromup in caso di Cromite già aggiornato ==
     echo -e "\e[1;32mVerifica di aggiornamenti di upcromup online...\e[0m"
 sleep 3
@@ -90,7 +93,7 @@ echo -e "\e[1;32mRichiesta di password di root o amministratore (se non già ins
 sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
 
 # == Installazione di pkill (se non presente) ==
-echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pkill...\e[0m"
+echo -e "\e[1;32mVerifica ed eventuale installazione delle dipendenze: software pkill...\e[0m"
 if ! command -v pkill &> /dev/null; then
     echo -e "\e[1;32mpkill non trovato, installazione in corso...\e[0m"
     if command -v dnf &> /dev/null; then
@@ -108,7 +111,7 @@ if ! command -v pkill &> /dev/null; then
 fi
 
 # == Installazione di pv (se non presente) ==
-echo -e "\e[1;32mVerifica e installazione delle dipendenze: software pv...\e[0m"
+echo -e "\e[1;32mVerifica ed eventuale installazione delle dipendenze: software pv...\e[0m"
 if ! command -v pv &> /dev/null; then
     echo -e "\e[1;32mpv non trovato, installazione in corso...\e[0m"
     if command -v dnf &> /dev/null; then
@@ -324,6 +327,7 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   echo "✅ Cache KDE aggiornata."
 fi
 sleep 1
+
 # == Eliminazione cartella di lavoro ==
 echo -e "\e[1;32mEliminazione cartella di lavoro...\e[0m"
 sleep 3
