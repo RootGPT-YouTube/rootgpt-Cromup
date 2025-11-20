@@ -39,24 +39,19 @@ echo -e "${RESET}"
 # == CONTROLLO VERSIONE ==
 echo -e "\e[1;32mControllo versione di Cromite...\e[0m"
 sleep 2
-remote_etag=$(curl -sI "$FILE_URL" | grep -i '^etag:' | cut -d' ' -f2- | tr -d '\r\n "')
-version_file="$CROMITE_DIR/.cromite_version"
-
-# Verifica che l'ETag sia stato recuperato correttamente
-if [ -z "$remote_etag" ]; then
-    echo -e "\e[1;33mAttenzione: impossibile recuperare l'ETag remoto. Procedo con l'aggiornamento per sicurezza.\e[0m"
-    local_etag=""
+remote_date=$(curl -sI "$FILE_URL" | grep -i '^Last-Modified:' | cut -d' ' -f2-)
+remote_epoch=$(date -d "$remote_date" +%s)
+local_file="$CROMITE_DIR/cromite"
+if [ -f "$local_file" ]; then
+    local_epoch=$(stat -c %Y "$local_file")
 else
-    if [ -f "$version_file" ]; then
-        local_etag=$(cat "$version_file")
-    else
-        echo -e "\e[1;33mFile di versione non trovato, procedo con installazione completa.\e[0m"
-        local_etag=""
-    fi
+    echo -e "\e[1;33mFile locale non trovato, procedo con installazione completa.\e[0m"
+    local_epoch=0
 fi
 
-if [ -n "$remote_etag" ] && [ "$remote_etag" = "$local_etag" ]; then
-    echo -e "\e[1;32mCromite è già aggiornato (ETag: $remote_etag). Proseguo con altre verifiche...\e[0m"
+if [ "$remote_epoch" -le "$local_epoch" ]; then
+    echo -e "\e[1;32mCromite è già aggiornato. Proseguo con altre verifiche...\e[0m"
+
 # == Installazione di uncromup in caso di Cromite già aggiornato ==
     echo -e "\e[1;32mVerifica di aggiornamenti di uncromup online...\e[0m"
     sleep 3
@@ -174,11 +169,8 @@ rm "$DOWNLOAD_DIR/$FILE_NAME"
 cp "$CROMITE_DIR/chrome" "$CROMITE_DIR/cromite"
 rm "$CROMITE_DIR/chrome"
 
-# == Salva l'ETag della versione installata ==
-if [ -n "$remote_etag" ]; then
-    echo "$remote_etag" > "$version_file"
-    echo -e "\e[1;32mVersione installata salvata (ETag: $remote_etag)\e[0m"
-fi
+# == Imposta il timestamp del file locale uguale a quello remoto ==
+touch -d "$remote_date" "$local_file"
 
 # == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
 if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
