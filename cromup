@@ -39,41 +39,43 @@ echo -e "${RESET}"
 # == CONTROLLO VERSIONE ==
 echo -e "\e[1;32mControllo versione di Cromite...\e[0m"
 sleep 2
-remote_etag=$(curl -sI "$FILE_URL" | grep -i '^etag:' | cut -d' ' -f2- | tr -d '\r\n "')
+
+# Recupera il tag dell'ultima release da GitHub API
+remote_version=$(curl -s https://api.github.com/repos/uazo/cromite/releases/latest | grep '"tag_name":' | sed -E 's/.*"tag_name": "([^"]+)".*/\1/')
 version_file="$CROMITE_DIR/.cromite_version"
 
-# Verifica che l'ETag sia stato recuperato correttamente
-if [ -z "$remote_etag" ]; then
-    echo -e "\e[1;33mAttenzione: impossibile recuperare l'ETag remoto. Procedo con l'aggiornamento per sicurezza.\e[0m"
-    local_etag=""
+# Verifica che il tag sia stato recuperato correttamente
+if [ -z "$remote_version" ]; then
+    echo -e "\e[1;33mAttenzione: impossibile recuperare la versione remota. Procedo con l'aggiornamento per sicurezza.\e[0m"
+    local_version=""
 else
     if [ -f "$version_file" ]; then
-        local_etag=$(cat "$version_file")
+        local_version=$(cat "$version_file")
     else
         echo -e "\e[1;33mFile di versione non trovato, procedo con installazione completa.\e[0m"
-        local_etag=""
+        local_version=""
     fi
 fi
 
-if [ -n "$remote_etag" ] && [ "$remote_etag" = "$local_etag" ]; then
-    echo -e "\e[1;32mCromite è già aggiornato (ETag: $remote_etag). Proseguo con altre verifiche...\e[0m"
+if [ -n "$remote_version" ] && [ "$remote_version" = "$local_version" ]; then
+    echo -e "\e[1;32mCromite è già aggiornato (Versione: $remote_version). Proseguo con altre verifiche...\e[0m"
 # == Installazione di uncromup in caso di Cromite già aggiornato ==
     echo -e "\e[1;32mVerifica di aggiornamenti di uncromup online...\e[0m"
     sleep 3
-    # wget -O "$UNCROMUP_DIR" "$UNCROMUP_URL"
     curl -fL --progress-bar -o "$UNCROMUP_DIR" "$UNCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di uncromup!\e[0m"; exit 1; }
     sudo cp "$UNCROMUP_DIR" "$UNCROMUP_PATH"
     sudo chmod a+x "$UNCROMUP_PATH"
 
 # == Installazione di upcromup in caso di Cromite già aggiornato ==
     echo -e "\e[1;32mVerifica di aggiornamenti di upcromup online...\e[0m"
-sleep 3
-    # wget -O "$UPCROMUP_DIR" "$UPCROMUP_URL"
+    sleep 3
     curl -fL --progress-bar -o "$UPCROMUP_DIR" "$UPCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di upcromup!\e[0m"; exit 1; }
     sudo chmod a+x "$UPCROMUP_DIR"
     ~/Cromite/upcromup
     exit 0
 fi
+
+echo -e "\e[1;33mNuova versione disponibile: $remote_version (Attuale: ${local_version:-nessuna}). Procedo con l'aggiornamento...\e[0m"
 sleep 2
 
 # == Richiesta di password di root ==
@@ -174,10 +176,10 @@ rm "$DOWNLOAD_DIR/$FILE_NAME"
 cp "$CROMITE_DIR/chrome" "$CROMITE_DIR/cromite"
 rm "$CROMITE_DIR/chrome"
 
-# == Salva l'ETag della versione installata ==
-if [ -n "$remote_etag" ]; then
-    echo "$remote_etag" > "$version_file"
-    echo -e "\e[1;32mVersione installata salvata (ETag: $remote_etag)\e[0m"
+# == Salva il tag della versione installata ==
+if [ -n "$remote_version" ]; then
+    echo "$remote_version" > "$version_file"
+    echo -e "\e[1;32mVersione installata salvata (Tag: $remote_version)\e[0m"
 fi
 
 # == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
