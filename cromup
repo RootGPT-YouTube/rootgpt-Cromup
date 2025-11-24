@@ -239,17 +239,17 @@ echo -e "\e[1;32mCollegamento creato in: $DESKTOP_LOCAL\e[0m"
 if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
   if [ -f "$KDE_MENU" ]; then
     echo "🧹 Rimuovo override utente da KDE menu..."
-    rm -fr $KDE_MENU 2>/dev/null
+    rm -fr "$KDE_MENU"
     sleep 1
   fi
   echo "🔄 Ricostruisco cache SYCOCA..."
-  sudo gtk-update-icon-cache /usr/share/icons/hicolor 2>/dev/null
+  sudo gtk-update-icon-cache /usr/share/icons/hicolor
   sleep 2
-  kbuildsycoca6 --noincremental 2>/dev/null
+  kbuildsycoca6 --noincremental
   sleep 2
-  killall plasmashell 2>/dev/null
+  killall plasmashell
   sleep 3
-  kstart5 plasmashell 2>/dev/null &
+  kstart5 plasmashell
   sleep 2
   echo "✅ Cache KDE aggiornata."
   sleep 1
