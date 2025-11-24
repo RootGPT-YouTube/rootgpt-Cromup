@@ -286,7 +286,7 @@ sudo chmod a+x "$2"
 rm -f "$1" "$0"
 UPDATER
     
-    chmod +x "$CROMITE_DIR/.update_cromup.sh"
+    chmod a+x "$CROMITE_DIR/.update_cromup.sh"
     
     # Lancia l'aggiornamento in background e termina immediatamente questo script
     nohup "$CROMITE_DIR/.update_cromup.sh" "$CROMUP_TEMP" "$CROMUP_PATH" > /dev/null 2>&1 &
