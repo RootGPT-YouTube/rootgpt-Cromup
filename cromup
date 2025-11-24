@@ -322,5 +322,6 @@ fi
 sleep 2
 echo -e "\e[1;32m✅ Rimozione cartella di lavoro...\e[0m"
 sudo rm -fr "$HOME/rootgpt-Cromup"
+sleep 2
 echo -e "\e[1;32m✅ Installazione completata con successo!\e[0m"
 exit 0
