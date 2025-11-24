@@ -211,6 +211,29 @@ if [ -n "$remote_version" ]; then
 fi
 
 # ============================================
+# == CREAZIONE COLLEGAMENTO DESKTOP ==
+# ============================================
+echo -e "\e[1;32mCreazione collegamento nel menu applicazioni...\e[0m"
+mkdir -p "$HOME/.local/share/applications"
+
+cat > "$DESKTOP_LOCAL" << EOF
+[Desktop Entry]
+Version=1.0
+Name=Cromite
+Comment=Cromite Web Browser
+Exec=$CROMITE_DIR/cromite %U
+Terminal=false
+Type=Application
+Icon=cromite
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+EOF
+
+chmod a+x "$DESKTOP_LOCAL"
+echo -e "\e[1;32mCollegamento creato in: $DESKTOP_LOCAL\e[0m"
+
+# ============================================
 # == AGGIORNAMENTO CACHE KDE ==
 # ============================================
 if [[ "${XDG_CURRENT_DESKTOP:-}" == *"KDE"* ]] || [[ "${DESKTOP_SESSION:-}" == *"plasma"* ]]; then
@@ -286,7 +309,7 @@ sudo chmod a+x "$2"
 rm -f "$1" "$0"
 UPDATER
     
-    chmod a+x "$CROMITE_DIR/.update_cromup.sh"
+    chmod +x "$CROMITE_DIR/.update_cromup.sh"
     
     # Lancia l'aggiornamento in background e termina immediatamente questo script
     nohup "$CROMITE_DIR/.update_cromup.sh" "$CROMUP_TEMP" "$CROMUP_PATH" > /dev/null 2>&1 &
