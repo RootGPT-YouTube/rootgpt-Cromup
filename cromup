@@ -35,7 +35,7 @@ DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 echo -e "${GREEN}"
 echo "**************************************"
 echo "*                                    *"
-echo "*       Cromup by RootGPT            *"
+echo "*       Cromup by R∞tGPT             *"
 echo "*       Cromite by Uazo              *"
 echo "*                                    *"
 echo "**************************************"
@@ -67,9 +67,9 @@ fi
 # == VERIFICA SE AGGIORNAMENTO NECESSARIO ==
 # ============================================
 if [ -n "$remote_version" ] && [ "$remote_version" = "$local_version" ]; then
-    echo -e "\e[1;32mCromite Ã¨ giÃ  aggiornato (Versione: $remote_version). Proseguo con altre verifiche...\e[0m"
+    echo -e "\e[1;32mCromite è già aggiornato (Versione: $remote_version). Proseguo con altre verifiche...\e[0m"
     
-    # == Installazione di uncromup in caso di Cromite giÃ  aggiornato ==
+    # == Installazione di uncromup in caso di Cromite già aggiornato ==
     echo -e "\e[1;32mVerifica di aggiornamenti di uncromup online...\e[0m"
     sleep 3
     curl -fL --progress-bar -o "$UNCROMUP_DIR" "$UNCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di uncromup!\e[0m"; exit 1; }
@@ -81,7 +81,7 @@ if [ -n "$remote_version" ] && [ "$remote_version" = "$local_version" ]; then
     sleep 2
     
     if curl -fL --progress-bar -o "$CROMUP_TEMP" "$CROMUP_URL" 2>/dev/null; then
-        # Crea uno script temporaneo che sostituirÃ  cromup DOPO che questo script termina
+        # Crea uno script temporaneo che sostituirà cromup DOPO che questo script termina
         cat > "$CROMITE_DIR/.update_cromup.sh" << 'UPDATER'
 #!/bin/bash
 sleep 1
@@ -101,7 +101,7 @@ UPDATER
     fi
     
     sleep 2
-    echo -e "\e[1;32mâœ… Verifica completata!\e[0m"
+    echo -e "\e[1;32m✅ Verifica completata!\e[0m"
     exit 0
 fi
 
@@ -111,7 +111,7 @@ sleep 2
 # ============================================
 # == RICHIESTA PASSWORD ROOT ==
 # ============================================
-echo -e "\e[1;32mRichiesta di password di root o amministratore (se non giÃ  inserita in precedenza):\e[0m"
+echo -e "\e[1;32mRichiesta di password di root o amministratore (se non già inserita in precedenza):\e[0m"
 sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
 
 # ============================================
@@ -130,7 +130,7 @@ if ! command -v pkill &> /dev/null; then
     elif command -v zypper &> /dev/null; then
         sudo zypper install procps -y
     else
-        echo -e "\e[1;32mImpossibile installare pkill automaticamente, Ã¨ necessario installarlo manualmente.\e[0m"
+        echo -e "\e[1;32mImpossibile installare pkill automaticamente, è necessario installarlo manualmente.\e[0m"
         exit 1
     fi
 fi
@@ -148,7 +148,7 @@ if ! command -v pv &> /dev/null; then
     elif command -v zypper &> /dev/null; then
         sudo zypper install pv -y
     else
-        echo -e "\e[1;32mImpossibile installare pv automaticamente, Ã¨ necessario installarlo manualmente.\e[0m"
+        echo -e "\e[1;32mImpossibile installare pv automaticamente, è necessario installarlo manualmente.\e[0m"
         exit 1
     fi
 fi
@@ -211,48 +211,49 @@ if [ -n "$remote_version" ]; then
 fi
 
 # ============================================
-# == CREAZIONE COLLEGAMENTO DESKTOP ==
-# ============================================
-echo -e "\e[1;32mCreazione collegamento nel menu applicazioni...\e[0m"
-mkdir -p "$HOME/.local/share/applications"
-
-cat > "$DESKTOP_LOCAL" << EOF
-[Desktop Entry]
-Version=1.0
-Name=Cromite
-Comment=Cromite Web Browser
-Exec=$CROMITE_DIR/cromite %U
-Terminal=false
-Type=Application
-Icon=cromite
-Categories=Network;WebBrowser;
-MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
-StartupNotify=true
-EOF
-
-chmod a+x "$DESKTOP_LOCAL"
-echo -e "\e[1;32mCollegamento creato in: $DESKTOP_LOCAL\e[0m"
-
-# ============================================
 # == AGGIORNAMENTO CACHE KDE ==
 # ============================================
-if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
-  if [ -f "$KDE_MENU" ]; then
-    echo "🧹 Rimuovo override utente da KDE menu..."
-    rm -fr "$KDE_MENU"
-    sleep 1
+if [[ "${XDG_CURRENT_DESKTOP:-}" == *"KDE"* ]] || [[ "${DESKTOP_SESSION:-}" == *"plasma"* ]]; then
+  echo "🔄 Sistema KDE rilevato, aggiorno cache..."
+  
+  # Rimuovi override KDE se esistono
+  rm -f "$HOME/.config/menus/applications-kmenuedit.menu" 2>/dev/null
+  rm -rf "$HOME/.cache/"*plasma* 2>/dev/null
+  rm -f "$HOME/.cache/kactivitymanager-statsrc" 2>/dev/null
+  
+  # Aggiorna cache icone
+  echo "🔄 Aggiornamento cache icone..."
+  sudo gtk-update-icon-cache /usr/share/icons/hicolor 2>/dev/null
+  sleep 1
+  
+  # Ricostruisci cache KDE
+  echo "🔄 Ricostruzione cache SYCOCA..."
+  kbuildsycoca6 --noincremental 2>/dev/null
+  sleep 2
+  
+  # Aggiorna database desktop files
+  update-desktop-database "$HOME/.local/share/applications" 2>/dev/null
+  sleep 1
+  
+  # Ricostruisci nuovamente cache SYCOCA per sicurezza
+  echo "🔄 Seconda ricostruzione cache SYCOCA..."
+  kbuildsycoca6 --noincremental 2>/dev/null
+  sleep 2
+  
+  # Riavvia Plasmashell solo se è in esecuzione
+  if pgrep -x plasmashell > /dev/null; then
+    echo "🔄 Riavvio Plasmashell..."
+    killall plasmashell 2>/dev/null
+    sleep 2
+    nohup plasmashell > /dev/null 2>&1 &
+    sleep 3
   fi
-  echo "🔄 Ricostruisco cache SYCOCA..."
-  sudo gtk-update-icon-cache /usr/share/icons/hicolor
-  sleep 2
-  kbuildsycoca6 --noincremental
-  sleep 2
-  killall plasmashell
-  sleep 3
-  kstart5 plasmashell
-  sleep 2
+  
   echo "✅ Cache KDE aggiornata."
   sleep 1
+else
+  echo "ℹ️  Sistema non-KDE, aggiorno solo cache icone..."
+  sudo gtk-update-icon-cache /usr/share/icons/hicolor 2>/dev/null || true
 fi
 
 # ============================================
@@ -270,13 +271,13 @@ sudo cp "$UNCROMUP_DIR" "$UNCROMUP_PATH"
 sudo chmod a+x "$UNCROMUP_PATH"
 
 # ============================================
-# == AUTOAGGIORNAMENTO CROMUP ==
+# == AUTO-AGGIORNAMENTO CROMUP ==
 # ============================================
 echo -e "\e[1;32mVerifica aggiornamenti di cromup online...\e[0m"
 sleep 2
 
 if curl -fL --progress-bar -o "$CROMUP_TEMP" "$CROMUP_URL" 2>/dev/null; then
-    # Crea uno script temporaneo che sostituirÃ  cromup DOPO che questo script termina
+    # Crea uno script temporaneo che sostituirà cromup DOPO che questo script termina
     cat > "$CROMITE_DIR/.update_cromup.sh" << 'UPDATER'
 #!/bin/bash
 sleep 1
@@ -285,7 +286,7 @@ sudo chmod a+x "$2"
 rm -f "$1" "$0"
 UPDATER
     
-    chmod a+x "$CROMITE_DIR/.update_cromup.sh"
+    chmod +x "$CROMITE_DIR/.update_cromup.sh"
     
     # Lancia l'aggiornamento in background e termina immediatamente questo script
     nohup "$CROMITE_DIR/.update_cromup.sh" "$CROMUP_TEMP" "$CROMUP_PATH" > /dev/null 2>&1 &
@@ -296,5 +297,5 @@ else
 fi
 
 sleep 2
-echo -e "\e[1;32mInstallazione completata con successo!\e[0m"
+echo -e "\e[1;32m✅ Installazione completata con successo!\e[0m"
 exit 0
