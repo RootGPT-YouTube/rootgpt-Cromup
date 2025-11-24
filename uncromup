@@ -27,24 +27,50 @@ sleep 1
 sudo rm -fr /usr/share/applications/Cromite.desktop
 sleep 1
 
-# == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
-if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
-  if [ -f "$KDE_MENU" ]; then
-    echo "Rimuovo override utente da KDE menu..."
-    rm -fr "$KDE_MENU"
-    sleep 1
+# ============================================
+# == AGGIORNAMENTO CACHE KDE ==
+# ============================================
+if [[ "${XDG_CURRENT_DESKTOP:-}" == *"KDE"* ]] || [[ "${DESKTOP_SESSION:-}" == *"plasma"* ]]; then
+  echo "🔄 Sistema KDE rilevato, aggiorno cache..."
+  
+  # Rimuovi override KDE se esistono
+  rm -f "$HOME/.config/menus/applications-kmenuedit.menu" 2>/dev/null
+  rm -rf "$HOME/.cache/"*plasma* 2>/dev/null
+  rm -f "$HOME/.cache/kactivitymanager-statsrc" 2>/dev/null
+  
+  # Aggiorna cache icone
+  echo "🔄 Aggiornamento cache icone..."
+  sudo gtk-update-icon-cache /usr/share/icons/hicolor 2>/dev/null
+  sleep 1
+  
+  # Ricostruisci cache KDE
+  echo "🔄 Ricostruzione cache SYCOCA..."
+  kbuildsycoca6 --noincremental 2>/dev/null
+  sleep 2
+  
+  # Aggiorna database desktop files
+  update-desktop-database "$HOME/.local/share/applications" 2>/dev/null
+  sleep 1
+  
+  # Ricostruisci nuovamente cache SYCOCA per sicurezza
+  echo "🔄 Seconda ricostruzione cache SYCOCA..."
+  kbuildsycoca6 --noincremental 2>/dev/null
+  sleep 2
+  
+  # Riavvia Plasmashell solo se è in esecuzione
+  if pgrep -x plasmashell > /dev/null; then
+    echo "🔄 Riavvio Plasmashell..."
+    killall plasmashell 2>/dev/null
+    sleep 2
+    nohup plasmashell > /dev/null 2>&1 &
+    sleep 3
   fi
-  echo "Ricostruisco cache SYCOCA..."
-  sudo gtk-update-icon-cache /usr/share/icons/hicolor
-  sleep 1
-  #sudo cp "$DESKTOP_GLOBAL" "$DESKTOP_LOCAL"
-  kbuildsycoca6 --noincremental
-  sleep 2
-  killall plasmashell
-  sleep 2
-  kstart5 plasmashell
-  sleep 1
+  
   echo "✅ Cache KDE aggiornata."
+  sleep 1
+else
+  echo "ℹ️  Sistema non-KDE, aggiorno solo cache icone..."
+  sudo gtk-update-icon-cache /usr/share/icons/hicolor 2>/dev/null || true
 fi
 
 # == Fine disinstallazione Cromite Browser ==
