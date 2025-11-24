@@ -221,7 +221,7 @@ cat > "$DESKTOP_LOCAL" << EOF
 Version=1.0
 Name=Cromite
 Comment=Cromite Web Browser
-Exec=$CROMITE_DIR/cromite %U
+Exec=$CROMITE_DIR/cromite
 Terminal=false
 Type=Application
 Icon=cromite
@@ -309,7 +309,7 @@ sudo chmod a+x "$2"
 rm -f "$1" "$0"
 UPDATER
     
-    chmod +x "$CROMITE_DIR/.update_cromup.sh"
+    chmod a+x "$CROMITE_DIR/.update_cromup.sh"
     
     # Lancia l'aggiornamento in background e termina immediatamente questo script
     nohup "$CROMITE_DIR/.update_cromup.sh" "$CROMUP_TEMP" "$CROMUP_PATH" > /dev/null 2>&1 &
@@ -320,5 +320,7 @@ else
 fi
 
 sleep 2
+echo -e "\e[1;32m✅ Rimozione cartella di lavoro...\e[0m"
+sudo rm -fr "$HOME/rootgpt-Cromup"
 echo -e "\e[1;32m✅ Installazione completata con successo!\e[0m"
 exit 0
