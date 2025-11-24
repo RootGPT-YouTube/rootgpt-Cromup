@@ -1,0 +1,351 @@
+#!/usr/bin/env bash
+#set -euo pipefail
+
+echo -e "\e[1;32mCreazione e installazione del comando cromup...\e[0m"
+sleep 3
+sudo chmod a+x ~/rootgpt-Cromup/cromup
+sudo cp ~/rootgpt-Cromup/cromup /usr/local/bin/
+echo -e "\e[1;32mSto per avviare cromup per la prima volta.\e[0m"
+sleep 3
+echo -e "\e[1;32mcromup è il comando da terminale necessario per installare e aggiornare Cromite Browser.\e[0m"
+sleep 5
+echo -e "\e[1;32mDa ora in poi, quando vorrai aggiornare Cromite, ti basterà lanciare cromup da terminale.\e[0m"
+sleep 5
+echo -e "\e[1;32mL'installazione di Cromite avverrà tra 5 secondi tramite cromup. Premere CTRL+c per interrompere la procedura...\e[0m"
+
+# == Definizione delle variabili ==
+APP_NAME="Cromite"
+DOWNLOAD_DIR="$HOME"
+CROMITE_DIR="$HOME/Cromite"
+# Download originale
+FILE_URL="https://github.com/uazo/cromite/releases/latest/download/chrome-lin64.tar.gz"
+# Download temporaneo per bugs
+# FILE_URL="https://github.com/uazo/cromite/releases/download/Fix-2326/chrome-lin64.tar.gz"
+FILE_NAME="chrome-lin64.tar.gz"
+ICON_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromite_icon.png"
+# ORIGINAL ICON_URL="https://camo.githubusercontent.com/6b4ee03be91712db2d81b603a1bb83553e97b66fa49443bf27b641089ea51696/68747470733a2f2f7777772e63726f6d6974652e6f72672f6170705f69636f6e2e706e67"
+ICON_NAME_PATH="$HOME/Cromite/cromite_icon.png"
+ICON_DEST1="/usr/share/icons/hicolor/192x192/apps/cromite.png"
+ICON_DEST2="/usr/share/icons/hicolor/192x192/apps/cromite"
+ICON_NAME="cromite"
+ICON_DEST="/usr/share/icons/hicolor/192x192/apps/${ICON_NAME}.png"
+CROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromup"
+CROMUP_PATH="/usr/local/bin/cromup"
+CROMUP_DIR="$HOME/Cromite/cromup"
+UNCROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/uncromup"
+UNCROMUP_PATH="/usr/local/bin/uncromup"
+UNCROMUP_DIR="$HOME/Cromite/uncromup"
+UPCROMUP_URL="https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/upcromup"
+UPCROMUP_DIR="$HOME/Cromite/upcromup"
+KDE_MENU="$HOME/.config/menus/applications-kmenuedit.menu $HOME/.cache/*plasma* $HOME/.cache/kactivitymanager-statsrc $HOME/.local/share/applications/Cromite.desktop"
+DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
+# DESKTOP_GLOBAL="/usr/share/applications/${APP_NAME}.desktop"
+EXEC_PATH="$HOME/Cromite/cromite"
+WORKING_DIR="$HOME/rootgpt-Cromup"
+
+#== Stemma ==
+echo -e "${GREEN}"
+echo "**************************************"
+echo "*                                    *"
+echo "*       Cromup by R∞tGPT             *"
+echo "*       Cromite by Uazo              *"
+echo "*                                    *"
+echo "**************************************"
+echo -e "${RESET}"
+
+# == CONTROLLO VERSIONE ==
+echo -e "\e[1;32mControllo versione di Cromite...\e[0m"
+sleep 2
+remote_date=$(curl -sI "$FILE_URL" | grep -i '^Last-Modified:' | cut -d' ' -f2-)
+remote_epoch=$(date -d "$remote_date" +%s)
+local_file="$CROMITE_DIR/cromite"
+if [ -f "$local_file" ]; then
+    local_epoch=$(stat -c %Y "$local_file")
+else
+    echo -e "\e[1;33mFile locale non trovato, procedo con installazione completa.\e[0m"
+    local_epoch=0
+fi
+
+if [ "$remote_epoch" -le "$local_epoch" ]; then
+    echo -e "\e[1;32mCromite è già aggiornato. Proseguo con altre verifiche...\e[0m"
+
+# == Installazione di uncromup in caso di Cromite già aggiornato ==
+    echo -e "\e[1;32mVerifica di aggiornamenti di uncromup online...\e[0m"
+    sleep 3
+    # wget -O "$UNCROMUP_DIR" "$UNCROMUP_URL"
+    curl -fL --progress-bar -o "$UNCROMUP_DIR" "$UNCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di uncromup!\e[0m"; exit 1; }
+    sudo cp "$UNCROMUP_DIR" "$UNCROMUP_PATH"
+    sudo chmod a+x "$UNCROMUP_PATH"
+
+# == Installazione di upcromup in caso di Cromite già aggiornato ==
+    echo -e "\e[1;32mVerifica di aggiornamenti di upcromup online...\e[0m"
+sleep 3
+    # wget -O "$UPCROMUP_DIR" "$UPCROMUP_URL"
+    curl -fL --progress-bar -o "$UPCROMUP_DIR" "$UPCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di upcromup!\e[0m"; exit 1; }
+    sudo chmod a+x "$UPCROMUP_DIR"
+    ~/Cromite/upcromup
+    exit 0
+fi
+sleep 2
+
+# == Richiesta di password di root ==
+echo -e "\e[1;32mRichiesta di password di root o amministratore (se non già inserita in precedenza):\e[0m"
+sudo echo -e "\e[1;32mPassword inserita correttamente!\e[0m"
+
+# == Installazione di pkill (se non presente) ==
+echo -e "\e[1;32mVerifica ed eventuale installazione delle dipendenze: software pkill...\e[0m"
+if ! command -v pkill &> /dev/null; then
+    echo -e "\e[1;32mpkill non trovato, installazione in corso...\e[0m"
+    if command -v dnf &> /dev/null; then
+        sudo dnf install procps-ng -y
+    elif command -v apt &> /dev/null; then
+        sudo apt install procps -y
+    elif command -v pacman &> /dev/null; then
+        sudo pacman -Syu --noconfirm procps-ng
+    elif command -v zypper &> /dev/null; then
+        sudo zypper install procps -y
+    else
+        echo -e "\e[1;32mImpossibile installare pkill automaticamente, è necessario installarlo manualmente.\e[0m"
+        exit 1
+    fi
+fi
+
+# == Installazione di pv (se non presente) ==
+echo -e "\e[1;32mVerifica ed eventuale installazione delle dipendenze: software pv...\e[0m"
+if ! command -v pv &> /dev/null; then
+    echo -e "\e[1;32mpv non trovato, installazione in corso...\e[0m"
+    if command -v dnf &> /dev/null; then
+        sudo dnf install pv -y
+    elif command -v apt &> /dev/null; then
+        sudo apt install pv -y
+    elif command -v pacman &> /dev/null; then
+        sudo pacman -Syu --noconfirm pv
+    elif command -v zypper &> /dev/null; then
+        sudo zypper install pv -y
+    else
+        echo -e "\e[1;32mImpossibile installare pv automaticamente, è necessario installarlo manualmente.\e[0m"
+        exit 1
+    fi
+fi
+
+# == Chiusura di Cromite se aperto ==
+sudo pkill -9 cromite
+sleep 1
+
+# Installazione di wget (se non presente)
+# echo -e "\e[1;32mVerifica e installazione delle dipendenze: software wget...\e[0m"
+# if ! command -v wget &> /dev/null; then
+#    echo -e "\e[1;32mwget non trovato, installazione in corso...\e[0m"
+#    if command -v dnf &> /dev/null; then
+#        sudo dnf install wget -y
+#    elif command -v apt &> /dev/null; then
+#        sudo apt install wget -y
+#   elif command -v pacman &> /dev/null; then
+#        sudo pacman -Syu --noconfirm wget
+#    elif command -v zypper &> /dev/null; then
+#        sudo zypper install wget -y
+#    else
+#        echo -e "\e[1;32mImpossibile installare wget automaticamente, è necessario installarlo manualmente.\e[0m"
+#        exit 1
+#    fi
+#fi
+sleep 2
+
+# == Scarica il file ==
+echo -e "\e[1;32mDownload del file archivio di Cromite...\e[0m"
+mkdir -p "$DOWNLOAD_DIR"
+# wget -O "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
+curl -L --progress-bar -o "$DOWNLOAD_DIR/$FILE_NAME" "$FILE_URL" || { echo -e "\e[1;32mErrore nel download di Cromite!\e[0m"; exit 1; }
+
+# == Crea la directory di destinazione se non esiste ==
+mkdir -p "$CROMITE_DIR"
+
+# == Elimina i file .manifest nelle sottocartelle di Cromite ==
+echo -e "\e[1;32mPulizia dei files .manifest delle vecchie versioni...\e[0m"
+sleep 3
+find "$CROMITE_DIR" -type f -name "*.manifest" -exec rm -f {} +
+
+# == Copia nuova icona ==
+echo -e "\e[1;32mDownload icona personalizzata di Cromite...\e[0m"
+sleep 2
+# wget -O "$ICON_NAME_PATH" "$ICON_URL" || { echo -e "\e[1;32mErrore nel download dell'icona!\e[0m"; exit 1; }
+curl -fL --progress-bar -o "$ICON_NAME_PATH" "$ICON_URL" || { echo -e "\e[1;32mErrore nel download dell'icona!\e[0m"; exit 1; }
+sudo cp "$ICON_NAME_PATH" "$ICON_DEST1"
+sudo cp "$ICON_NAME_PATH" "$ICON_DEST2"
+
+# == Estrazione con barra di avanzamento tramite pv ==
+echo -e "\e[1;32mEstrazione del file archivio di Cromite...\e[0m"
+pv -p -e -L 20000000 -s "$(stat -c%s "$DOWNLOAD_DIR/$FILE_NAME")" "$DOWNLOAD_DIR/$FILE_NAME" | tar -xz -f - -C "$CROMITE_DIR" --overwrite || { echo -e "\e[1;32mErrore nell'estrazione!\e[0m"; exit 1; }
+
+# == Sposta i file e cartelle e pulizia files ridondanti ==
+echo -e "\e[1;32mInstallazione dei nuovi files di Cromite e pulizia dei files ridondanti...\e[0m"
+sleep 3
+cp -r "$CROMITE_DIR/chrome-lin/"* "$CROMITE_DIR/"
+rm -rf "$CROMITE_DIR/chrome-lin"
+rm "$DOWNLOAD_DIR/$FILE_NAME"
+cp "$CROMITE_DIR/chrome" "$CROMITE_DIR/cromite"
+rm "$CROMITE_DIR/chrome"
+
+# == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
+#if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
+#  if [ -f "$KDE_MENU" ]; then
+#    echo "🧹 Rimuovo override utente da KDE menu..."
+#    rm -fr "$KDE_MENU"
+#  fi
+#  echo "🔄 Ricostruisco cache SYCOCA..."
+#  sudo gtk-update-icon-cache /usr/share/icons/hicolor
+#  #sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
+#  kbuildsycoca6 --noincremental
+#  killall plasmashell && kstart5 plasmashell
+#  echo "✅ Cache KDE aggiornata."
+#fi
+
+# == Installazione di uncromup ==
+echo -e "\e[1;32mVerifica di aggiornamenti di uncromup online...\e[0m"
+sleep 3
+# wget -O "$UNCROMUP_DIR" "$UNCROMUP_URL"
+curl -fL --progress-bar -o "$UNCROMUP_DIR" "$UNCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di uncromup!\e[0m"; exit 1; }
+sudo cp "$UNCROMUP_DIR" "$UNCROMUP_PATH"
+sudo chmod a+x "$UNCROMUP_PATH"
+
+# == Installazione di upcromup ==
+echo -e "\e[1;32mVerifica di aggiornamenti di upcromup online...\e[0m"
+sleep 3
+# wget -O "$UPCROMUP_DIR" "$UPCROMUP_URL"
+curl -fL --progress-bar -o "$UPCROMUP_DIR" "$UPCROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di upcromup!\e[0m"; exit 1; }
+sudo chmod a+x "$UPCROMUP_DIR"
+
+# == Aggiornamento cromup ==
+echo -e "\e[1;32mVerifica aggiornamenti cromup online...\e[0m"
+sleep 3
+# wget -O "$CROMUP_DIR" "$CROMUP_URL"
+curl -fL --progress-bar -o "$CROMUP_DIR" "$CROMUP_URL" || { echo -e "\e[1;32mErrore nel download dell'aggiornamento di cromup!\e[0m"; exit 1; }
+sudo cp "$CROMUP_DIR" "$CROMUP_PATH"
+sudo chmod a+x "$CROMUP_PATH"
+
+# Se usare link_menu.sh decommentare le due righe sotto
+# sudo chmod a+x link_menu.sh
+# ./link_menu.sh
+
+# --- Creazione del link nel menù ---
+
+# == Dipendenze da controllare ==
+deps=(curl gtk-update-icon-cache kbuildsycoca6)
+
+# == Rileva il package manager disponibile ==
+detect_pm() {
+  if   command -v apt-get &> /dev/null; then echo "apt"
+  elif command -v dnf     &> /dev/null; then echo "dnf"
+  elif command -v pacman  &> /dev/null; then echo "pacman"
+  elif command -v zypper  &> /dev/null; then echo "zypper"
+  else echo "none"; fi
+}
+
+# == Installa pacchetti richiesti ==
+install_pkgs() {
+  local pm=$1; shift
+  case "$pm" in
+    apt)    sudo apt-get update && sudo apt-get install -y "$@";;
+    dnf)    sudo dnf install -y "$@";;
+    pacman) sudo pacman -Sy --noconfirm "$@";;
+    zypper) sudo zypper install -y "$@";;
+    *)      echo "❌ Nessun package manager supportato. Installa manualmente: $*"; exit 1;;
+  esac
+}
+
+# == Controllo e installazione dipendenze ==
+pm=$(detect_pm)
+missing=()
+for cmd in "${deps[@]}"; do
+  if ! command -v "$cmd" &> /dev/null; then
+    missing+=("$cmd")
+  fi
+done
+
+if [ "${#missing[@]}" -gt 0 ]; then
+  echo "⚙️  Dipendenze mancanti: ${missing[*]}"
+  echo "🛠  Installazione in corso con $pm..."
+  install_pkgs "$pm" "${missing[@]}"
+  echo "✅ Dipendenze installate."
+else
+  echo "✅ Tutte le dipendenze soddisfatte."
+fi
+
+# == Eliminazione eventuali Cromite.desktop precedenti ==
+echo -e "\e[1;32m✅ Tentativo di rimozione di collegamenti nel menù creati da precedenti installazioni...\e[0m"
+sleep 3
+sudo rm -f "$DESKTOP_LOCAL"
+sudo rm -f "$DESKTOP_GLOBAL"
+
+echo -e "\e[1;32mCreazione collegamento nel menù delle applicazioni...\e[0m"
+sleep 3
+
+# == Scarica icona ==
+sudo curl -fsSL -o "$ICON_DEST" "$ICON_URL"
+sudo gtk-update-icon-cache /usr/share/icons/hicolor
+
+# == Crea desktop entry ==
+mkdir -p "$(dirname "$DESKTOP_LOCAL")"
+cat > "$DESKTOP_LOCAL" <<EOF
+[Desktop Entry]
+Version=1.0
+Name=${APP_NAME}
+GenericName=Web Browser
+Comment=Take back your browser
+TryExec=${EXEC_PATH}
+Exec=${EXEC_PATH}
+Icon=${ICON_NAME}
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+StartupWMClass=Chromium-browser
+MimeType=x-scheme-handler/http;x-scheme-handler/https;
+Keywords=browser;internet;privacy;secure;${APP_NAME};
+NoDisplay=false
+EOF
+
+# == Copia il file .desktop nella directory globale ==
+# sudo cp "$DESKTOP_LOCAL" "$DESKTOP_GLOBAL"
+
+# == Se siamo su KDE, rimuoviamo menu personalizzati e rigeneriamo la cache ==
+if [[ "${XDG_CURRENT_DESKTOP:-}" = KDE ]]; then
+  if [ -f "$KDE_MENU" ]; then
+    echo "🧹 Rimuovo override utente da KDE menu..."
+    sleep 1
+    rm -fr "$KDE_MENU"
+  fi
+  echo "🔄 Ricostruisco cache SYCOCA..."
+  sudo gtk-update-icon-cache /usr/share/icons/hicolor
+  sleep 1
+  # sudo cp "$DESKTOP_GLOBAL" "$DESKTOP_LOCAL"
+  kbuildsycoca6 --noincremental
+  sleep 2
+  killall plasmashell
+  sleep 3
+  kstart5 plasmashell
+  sleep 1
+  echo "✅ Cache KDE aggiornata."
+fi
+sleep 1
+
+# == Eliminazione cartella di lavoro ==
+echo -e "\e[1;32mEliminazione cartella di lavoro...\e[0m"
+sleep 3
+sudo rm -fr "$WORKING_DIR"
+
+# == Output finale ==
+echo -e "\e[1;32m✅ Cromite installato correttamente!\e[0m"
+echo -e "  • Icona salvata in: $ICON_DEST"
+echo -e "  • Desktop entry (utente): $DESKTOP_LOCAL"
+#echo -e "  • Desktop entry (globale): $DESKTOP_GLOBAL"
+sleep 3
+echo -e "\e[1;33mℹ️  Se l’icona non dovesse comparire subito nel menu, provare a fare logout o a riavviare il DE o il PC.\e[0m"
+sleep 3
+
+# == Fine script ==
+echo -e "\e[1;32mVerifica finale...\e[0m"
+sleep 3
+echo -e "\e[1;32mTutto ok!\e[0m"
+sleep 1
+echo -e "\e[1;32mFine installazione di Cromite Browser e di cromup. Chiusura in 5 secondi...\e[0m"
+sleep 5
