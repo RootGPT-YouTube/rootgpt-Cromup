@@ -35,7 +35,7 @@ DESKTOP_LOCAL="$HOME/.local/share/applications/${APP_NAME}.desktop"
 echo -e "${GREEN}"
 echo "**************************************"
 echo "*                                    *"
-echo "*       Cromup by RâˆžtGPT             *"
+echo "*       Cromup by RootGPT            *"
 echo "*       Cromite by Uazo              *"
 echo "*                                    *"
 echo "**************************************"
@@ -90,7 +90,7 @@ sudo chmod a+x "$2"
 rm -f "$1" "$0"
 UPDATER
         
-        chmod +x "$CROMITE_DIR/.update_cromup.sh"
+        chmod a+x "$CROMITE_DIR/.update_cromup.sh"
         
         # Lancia l'aggiornamento in background e termina immediatamente questo script
         nohup "$CROMITE_DIR/.update_cromup.sh" "$CROMUP_TEMP" "$CROMUP_PATH" > /dev/null 2>&1 &
@@ -230,7 +230,7 @@ MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme
 StartupNotify=true
 EOF
 
-chmod +x "$DESKTOP_LOCAL"
+chmod a+x "$DESKTOP_LOCAL"
 echo -e "\e[1;32mCollegamento creato in: $DESKTOP_LOCAL\e[0m"
 
 # ============================================
@@ -296,5 +296,5 @@ else
 fi
 
 sleep 2
-echo -e "\e[1;32mâœ… Installazione completata con successo!\e[0m"
+echo -e "\e[1;32mInstallazione completata con successo!\e[0m"
 exit 0
