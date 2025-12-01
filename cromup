@@ -219,13 +219,15 @@ mkdir -p "$HOME/.local/share/applications"
 cat > "$DESKTOP_LOCAL" << EOF
 [Desktop Entry]
 Version=1.0
+GenericName=Web Browser
 Name=Cromite
-Comment=Cromite Web Browser
+Comment=Take Back Your Browser
 Exec=$CROMITE_DIR/cromite
 Terminal=false
 Type=Application
 Icon=cromite
 Categories=Network;WebBrowser;
+StartupWMClass=Chromium-browser
 MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
 StartupNotify=true
 EOF
