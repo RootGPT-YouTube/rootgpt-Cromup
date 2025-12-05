@@ -215,6 +215,7 @@ fi
 # ============================================
 echo -e "\e[1;32mCreazione collegamento nel menu applicazioni...\e[0m"
 mkdir -p "$HOME/.local/share/applications"
+sudo rm -f "$DESKTOP_LOCAL"
 
 cat > "$DESKTOP_LOCAL" << EOF
 [Desktop Entry]
