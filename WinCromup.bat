@@ -11,9 +11,32 @@ if not exist "C:\Cromite" (
     mkdir "C:\Cromite"
     if errorlevel 1 (
         echo Errore nella creazione della cartella.
-	pause
+        pause
         exit /b
     )
+)
+
+REM ===Verifica aggiornamenti tramite ETag===
+echo Controllo aggiornamenti disponibili...
+
+REM Ottieni l'ETag corrente dal server GitHub
+for /f "tokens=*" %%i in ('powershell -Command "(Invoke-WebRequest -Uri 'https://github.com/uazo/cromite/releases/latest/download/chrome-win.zip' -Method Head -UseBasicParsing).Headers.ETag"') do set NEW_ETAG=%%i
+
+REM Leggi l'ETag salvato localmente
+set OLD_ETAG=
+if exist "C:\Cromite\etag.txt" (
+    set /p OLD_ETAG=<"C:\Cromite\etag.txt"
+)
+
+REM Confronta gli ETag
+if "!NEW_ETAG!"=="!OLD_ETAG!" (
+    echo Nessun aggiornamento disponibile. Cromite e gia aggiornato.
+    echo ETag corrente: !OLD_ETAG!
+    goto skip_download
+) else (
+    echo Nuovo aggiornamento disponibile!
+    echo ETag vecchio: !OLD_ETAG!
+    echo ETag nuovo: !NEW_ETAG!
 )
 
 REM ===Cancellazione file .manifest===
@@ -36,6 +59,10 @@ if exist "C:\Cromite\chrome-win.zip" (
     pause
     exit /b
 )
+
+REM ===Salva il nuovo ETag===
+echo !NEW_ETAG!>"C:\Cromite\etag.txt"
+echo ETag salvato per controlli futuri.
 
 REM ===Decompressione===
 echo Applicazione degli aggiornamenti del Browser Cromite in corso...
@@ -74,30 +101,25 @@ if errorlevel 1 (
     exit /b
 )
 
-REM ===Download Icona personalizzata===
-echo Download dell'icona personalizzata...
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/RootGPT-YouTube/rootgpt-Cromup/refs/heads/main/cromite_icon.ico', 'C:\Cromite\chrome-win\cromite_icon.ico')"
-if not exist "C:\Cromite\chrome-win\cromite_icon.ico" (
-    echo Errore nel download dell'icona.
-    pause
-    exit /b
-)
+:skip_download
 
 REM ===Creazione collegamento nel menu start===
-echo Rimozione del collegamento esistente, se presente...
-powershell -Command "if (Test-Path \"$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Cromite.lnk\") { Remove-Item \"$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Cromite.lnk\" }"
+echo Verifica collegamento nel menu Start...
 
-echo Creazione del collegamento nel menu Start con icona personalizzata...
-powershell -Command ^
-"$s = \"$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Cromite.lnk\"; ^
-$t = \"C:\Cromite\chrome-win\cromite.exe\"; ^
-$i = \"C:\Cromite\chrome-win\cromite_icon.ico\"; ^
-$ws = New-Object -ComObject WScript.Shell; ^
-$lnk = $ws.CreateShortcut($s); ^
-$lnk.TargetPath = $t; ^
-$lnk.IconLocation = $i; ^
-$lnk.Save()"
+REM Controlla se il collegamento esiste già
+if exist "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Cromite.lnk" (
+    echo Collegamento gia presente nel menu Start.
+) else (
+    echo Creazione del collegamento nel menu Start...
+    powershell -Command "$s = \"%APPDATA%\Microsoft\Windows\Start Menu\Programs\Cromite.lnk\"; $t = \"C:\Cromite\chrome-win\cromite.exe\"; $ws = New-Object -ComObject WScript.Shell; $lnk = $ws.CreateShortcut($s); $lnk.TargetPath = $t; $lnk.Save()"
+    echo Collegamento creato con successo.
+)
 
 REM ===Messaggio di chiusura===
-echo Esecuzione script terminata con successo.
+echo.
+echo ================================================
+echo Esecuzione script terminata con successo!
+echo ================================================
+echo.
 pause
+exit /b
